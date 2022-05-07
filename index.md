@@ -1,5 +1,3 @@
-## OU Thai Student Association
-
 ## Links
 
 - [Organization Page](https://ohio.campuslabs.com/engage/organization/thai-student-association)
