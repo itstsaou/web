@@ -1,4 +1,10 @@
-# OU TSA Links
+---
+layout: default
+title: Thai Student Association
+description: Ohio University
+---
+
+## Links
 
 - Join us in [Bobcat Connect](https://ohio.campuslabs.com/engage/organization/thai-student-association)
 - Follow us on [Twitter](https://twitter.com/itstsaou)
