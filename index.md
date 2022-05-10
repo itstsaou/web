@@ -1,8 +1,12 @@
 ---
 layout: default
 title: Thai Student Association
-description: Ohio University
+description: at Ohio University
 ---
+
+## Want to study Thai language?
+
+Check out the classes being offered for Fall [here](https://langs.tsaou.page/courses). For more information, please contact [Ms. Pittaya Paladroi-Shane](https://www.ohio.edu/cis/profile/paladroi).
 
 ## Other links
 
