@@ -1,3 +1,4 @@
-theme: jekyll-theme-cayman
 title: Thai Student Association
 google_analytics: G-WQ161LH8W7
+plugins:
+  - jekyll-seo-tag
