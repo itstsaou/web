@@ -1,8 +1,6 @@
 ---
 ---
 
-@import '_include-media';
-
 html, body {
     overflow: hidden;
 }
@@ -32,57 +30,22 @@ body {
         color: #FFF;
 
         .color-1 {
-            @include media(">phone", "<tablet") {
-                width: 20px;
-                height: 20px;
-            }
-            
-            @include media(">tablet", "<950px") {
-                width: 30px;
-                height: 30px;
-            }
-            @include media(">desktop") {
-                width: 60px;
-                height: 60px;
-            }
-            
+            width: 60px;
+            height: 60px;    
             border-radius: 50px;
             background-color: #000;
             box-shadow: 2px 2px 3px #999;
         }
         .color-2 {
-            @include media(">phone", "<tablet") {
-                width: 20px;
-                height: 20px;
-            }
-            
-            @include media(">tablet", "<950px") {
-                width: 30px;
-                height: 30px;
-            }
-            @include media(">desktop") {
-                width: 60px;
-                height: 60px;
-            }
-
+            width: 60px;
+            height: 60px;
             border-radius: 50px;
             background-color: #f00;
             box-shadow: 2px 2px 3px #999;
         }
         .color-3 {
-            @include media(">phone", "<tablet") {
-                width: 20px;
-                height: 20px;
-            }
-            
-            @include media(">tablet", "<950px") {
-                width: 30px;
-                height: 30px;
-            }
-            @include media(">desktop") {
-                width: 60px;
-                height: 60px;
-            }
+            width: 60px;
+            height: 60px;
             border-radius: 50px;
             background-color: magenta;
             box-shadow: 2px 2px 3px #999;

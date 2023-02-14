@@ -1,6 +1,7 @@
 ---
 layout: default
 title: About Us
+description: here is a bit about our organization
 ---
 
 We are association that aims
