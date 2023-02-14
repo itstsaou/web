@@ -1,7 +1,8 @@
 ---
 layout: default
+nav-slug: about
 title: About Us
-description: here is a bit about our organization
+description: Let hear our story!
 ---
 
 We are association that aims
@@ -10,4 +11,7 @@ We are association that aims
 2. To serve as cultural ambassadors of Thailand and raise awareness of Thailand and Thai culture among the student body at Ohio University for the purpose of fostering cross-cultural understanding and fellowship.
 3. To further development leadership skills, collaboration and cross-cultural interaction.
 
-[back](./)
+## History
+
+## Contact Us
+

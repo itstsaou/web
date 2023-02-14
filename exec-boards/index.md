@@ -1,14 +1,11 @@
 ---
 layout: default
+nav-slug: exec-boards
 title: Executive Boards
-description: here is a bit about our organization
+description: Meet our executive boards!
 ---
 
-## Executive Boards
-
-Meet our executive boards!
-
-### Academic year 2022-2023
+### 2022-Present
 
 **President:** Paul Phongkusolchit  
 **Vice President:** Saruda Seeharit  
