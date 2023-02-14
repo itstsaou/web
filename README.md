@@ -7,3 +7,9 @@ bundle install
 # To locally serve the website during development
 bundle exec jekyll serve
 ```
+
+To update Gems
+
+```console
+bundle update
+```
