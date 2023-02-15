@@ -21,4 +21,18 @@ description: Meet our executive boards!
 **Secretary:** Wipada Wanich  
 **Faculty Advisor:** [Jeffrey Shane](https://www.ohio.edu/library/about/staff/shane)
 
-[back](/)
+### 1998
+
+**President:** Sedtha Mahasantipiya  
+**Vice President:** Teeraya Thongkam  
+**Treasurer:** Kitaya Suksingha  
+**Secretary:** Nidi Boonma  
+**Service:** Taveewat Chan­taraseno  
+**Committee:** Marut Pimmarat, Sonram Sangvilai  
+
+(source Athena yearbook, 1998 pp.132)
+
+### 1991
+
+no executive board information; Athena yearbook, 1991 page 36 mentioned that Thai Student Organization participated
+in the international street fair.
