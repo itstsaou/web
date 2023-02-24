@@ -1,3 +1,37 @@
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-analytics.js";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+} from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
+
+/*
+For stroke animation:
+https://www.cassie.codes/posts/creating-my-logo-animation/
+*/
+
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyCwmb8vgK0Bi5sgmyHa3Rm6FuHyEEeY78w",
+  authDomain: "thai-student-assoc.firebaseapp.com",
+  projectId: "thai-student-assoc",
+  storageBucket: "thai-student-assoc.appspot.com",
+  messagingSenderId: "813535396713",
+  appId: "1:813535396713:web:f55ce49234a15038c833f8",
+  measurementId: "G-43GJZF4RC1",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const db = getFirestore(app);
+
 // from https://blog.bitsrc.io/debounce-understand-and-learn-how-to-use-this-essential-javascript-skill-9db0c9afbfc1
 function debounce(func, delay = 250) {
   let timerId;
@@ -9,13 +43,20 @@ function debounce(func, delay = 250) {
   };
 }
 
-function init() {
-  const nameList = [
+async function init() {
+  const querySnapshot = await getDocs(collection(db, "names"));
+  let nameList = new Array();
+  querySnapshot.forEach((doc) => {
+    nameList.push(doc.data());
+  });
+
+  const nameList2 = [
     { engName: "Fiona", thName: "ฟีโอน่า" },
     { engName: "James", thName: "เจมส์" },
     { engName: "Robert", thName: "โรเบิร์ท" },
     { engName: "John", thName: "จอน" },
     { engName: "Michael", thName: "ไมเคิล" },
+    //
     { engName: "David", thName: "เดวิด" },
     { engName: "William", thName: "วิวเลียม" },
     { engName: "Richard", thName: "ริชาจ" },
