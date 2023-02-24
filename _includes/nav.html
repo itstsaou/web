@@ -1,41 +1,86 @@
 <nav class="navbar navbar-expand-lg bg-primary">
   <div class="container">
     <a class="navbar-brand" href="/">OU TSA</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link {% if page.nav-slug == 'home' %}active{% endif %}" aria-current="page" href="/">Home</a>
+          <a
+            class="nav-link {% if page.nav-slug == 'home' %}active{% endif %}"
+            aria-current="page"
+            href="/"
+            >Home</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link {% if page.nav-slug == 'events' %}active{% endif %}" href="/events/">Events</a>
+          <a
+            class="nav-link {% if page.nav-slug == 'events' %}active{% endif %}"
+            href="/events/"
+            >Events</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link {% if page.nav-slug == 'community' %}active{% endif %}" href="/community.html">Community</a>
+          <a
+            class="nav-link {% if page.nav-slug == 'community' %}active{% endif %}"
+            href="/community.html"
+            >Community</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link {% if page.nav-slug == 'thailand' %}active{% endif %}" href="/thailand.html">Thailand</a>
+          <a
+            class="nav-link {% if page.nav-slug == 'thailand' %}active{% endif %}"
+            href="/thailand.html"
+            >Thailand</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link {% if page.nav-slug == 'exec-boards' %}active{% endif %}" href="/exec-boards/">Executive Boards</a>
+          <a
+            class="nav-link {% if page.nav-slug == 'exec-boards' %}active{% endif %}"
+            href="/exec-boards/"
+            >Executive Boards</a
+          >
         </li>
         <li class="nav-item me-auto">
-          <a class="nav-link {% if page.nav-slug == 'about' %}active{% endif %}" href="/about.html">About</a>
+          <a
+            class="nav-link {% if page.nav-slug == 'about' %}active{% endif %}"
+            href="/about.html"
+            >About</a
+          >
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
             Tools
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="/canvas">Canvas</a></li>
+            <li><a class="dropdown-item" href="/name-list">Name List</a></li>
             <li>
-              <hr class="dropdown-divider">
+              <hr class="dropdown-divider" />
             </li>
             <li><a class="dropdown-item disabled" href="#">Passport</a></li>
-            <li><a class="dropdown-item disabled" href="https://festive-lamarr-02c026.netlify.app/">Loy Krathong</a></li>
+            <li>
+              <a
+                class="dropdown-item disabled"
+                href="https://festive-lamarr-02c026.netlify.app/"
+                >Loy Krathong</a
+              >
+            </li>
           </ul>
         </li>
       </ul>
