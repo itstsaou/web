@@ -252,11 +252,7 @@ export class NamesApp extends LitElement {
           />
         </div>
       </div>
-      ${this.names.length !== 0
-        ? html`<div class="p-5 mb-4 bg-light rounded-3">
-            <div class="container-fluid">${foundNames}</div>
-          </div>`
-        : ""}`;
+      ${this.names.length !== 0 ? foundNames : ""}`;
   }
 
   renderNewPairPage() {

@@ -15,14 +15,31 @@ export class NameCard extends LitElement {
 
   constructor() {
     super();
+    this.isSeqVisible = false;
     this.eng = "bob";
     this.th = "บ็อบ";
   }
 
+  createRenderRoot() {
+    return this;
+  }
+
+  _toggleSeqVisibility() {
+    this.isSeqVisible = !this.isSeqVisible;
+    this.requestUpdate();
+  }
+
   render() {
-    return html`<div class="name-card">
-      <h1>${this.eng} : ${this.th}</h1>
-      <a-sequence value=${this.th}></a-sequence>
+    // TODO: Toggle visibility of <a-sequence>
+    const seq = html`<a-sequence value=${this.th}></a-sequence>`;
+    return html`<div class="p-5 mb-4 bg-light rounded-3">
+      <div class="container-fluid">
+        <h1 @click=${this._toggleSeqVisibility}>
+          ${this.eng} : ${this.th}
+          ${this.isSeqVisible ? html`&#x25B2;` : html`&#x25BC;`}
+        </h1>
+        ${this.isSeqVisible ? seq : ""}
+      </div>
     </div>`;
   }
 }
