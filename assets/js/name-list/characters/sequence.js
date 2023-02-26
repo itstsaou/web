@@ -60,7 +60,6 @@ export class Sequence extends LitElement {
           <div class="control-box">
             <button @click=${this._showPrev} type="button">&lt;</button>
             <button @click=${this._showNext} type="button">&gt;</button>
-            <button type="button">loop</button>
           </div>
         </div>`;
       }

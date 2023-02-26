@@ -270,7 +270,7 @@ async function init() {
     console.log(result);
 
     const template =
-      "<% names.forEach(function({item}) { %> <li><%= item.engName %> : <%= item.thName %></li> <% }) %>";
+      '<% names.forEach(function({item}) { %> <div class="name-card"><h1><%= item.engName %> : <%= item.thName %></h1><a-sequence value="<%= item.thName %>"></a-sequence></div> <% }) %>';
     foundNamesContainer.innerHTML = ejs.render(template, { names: result });
   }
 
