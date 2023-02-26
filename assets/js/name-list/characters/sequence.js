@@ -58,6 +58,7 @@ export class Sequence extends LitElement {
         return html`<div class="seq-container">
           <th-character name=${charName} loop="true"></th-character>
           <div class="control-box">
+            <p>${this.index + 1} / ${this.value.length}</p>
             <button @click=${this._showPrev} type="button">&lt;</button>
             <button @click=${this._showNext} type="button">&gt;</button>
           </div>

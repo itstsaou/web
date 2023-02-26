@@ -1,3 +1,6 @@
+// https://th.wikipedia.org/wiki/%E0%B8%AD%E0%B8%B1%E0%B8%81%E0%B8%A9%E0%B8%A3%E0%B9%84%E0%B8%97%E0%B8%A2
+// TODO(KC): Embed style in path? We extract style out because we manually animate the path
+// However, now that we are relying on lib, we can store the style on the path again.
 import {
   styleMap,
   html,

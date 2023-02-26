@@ -39,35 +39,15 @@
 
     <script
       type="module"
-      src="{{ '/assets/js/name-list/characters/sequence.js?v=' | append: site.github.build_revision | relative_url }}"
+      src="{{ '/assets/js/name-list/names-app.js?v=' | append: site.github.build_revision | relative_url }}"
     ></script>
   </head>
   <body>
-    <main>
-      <div class="container">
-        <div class="p-5 mt-4 mb-4 bg-light rounded-3">
-          <div class="container-fluid">
-            <label for="eng-name" class="form-label">English Name</label>
-            <input
-              type="text"
-              class="form-control"
-              id="eng-name"
-              placeholder="Fiona"
-            />
-          </div>
-        </div>
-        <div class="p-5 mb-4 bg-light rounded-3">
-          <div class="container-fluid">
-            <ul id="found-names"></ul>
-          </div>
-        </div>
-      </div>
-      <!--<th-character name="ึ"></th-character>-->
-    </main>
-    <script src="{{ '/assets/js/name-list/ejs.min.js?v=' | append: site.github.build_revision | relative_url }}"></script>
-    <script
+    <names-app></names-app>
+    <!-- <script src="{{ '/assets/js/name-list/ejs.min.js?v=' | append: site.github.build_revision | relative_url }}"></script> -->
+    <!-- <script
       type="module"
       src="{{ '/assets/js/name-list/app.js?v=' | append: site.github.build_revision | relative_url }}"
-    ></script>
+    ></script> -->
   </body>
 </html>
