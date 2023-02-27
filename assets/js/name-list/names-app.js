@@ -33,6 +33,7 @@ export class NamesApp extends LitElement {
     _page: { state: true },
     _names: { state: true },
     _user: { state: true },
+    _debug: { state: true },
   };
 
   constructor() {
@@ -52,6 +53,7 @@ export class NamesApp extends LitElement {
     this._page = "home";
     this._names = [];
     this._user = null;
+    this._debug = false;
     // Application states.
     this.namesSnapshot = new Array();
     // Firebase stuff.
@@ -105,7 +107,7 @@ export class NamesApp extends LitElement {
     const querySnapshot = await getDocs(collection(this.db, "names"));
     querySnapshot.forEach((doc) => {
       const data = doc.data();
-      snapshot.push(data);
+      snapshot.push({id: doc.id, ...data});
     });
     return snapshot;
   }
@@ -198,6 +200,12 @@ export class NamesApp extends LitElement {
     this.loadNameSnapshot();
   }
 
+  _toggleDebugClicked(event) {
+    console.log("old: " + this._debug);
+    this._debug = this._debug ? false : true;
+    console.log("new: " + this._debug);
+  }
+
   renderNavBar() {
 
     const home_classes = {
@@ -261,6 +269,7 @@ export class NamesApp extends LitElement {
                   >Refresh</a
                 >
               </li>
+              ${this._user ? html`<li><a @click=${this._toggleDebugClicked} class="dropdown-item" href="#">Toggle Debug</a></li>` : ""}
               ${this._user ? html`<li><a @click=${this._signOutClicked} class="dropdown-item" href="#">Logout</a></li>` : ""}
             </ul>
           </div>
@@ -274,6 +283,8 @@ export class NamesApp extends LitElement {
       return html`<name-card
         eng=${name.item.engName}
         th=${name.item.thName}
+        fb-id=${name.item.id}
+        ?is-debug=${this._debug}
       ></name-card>`;
     });
     return html`<div class="p-5 mt-4 mb-4 bg-light rounded-3">

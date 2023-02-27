@@ -11,6 +11,8 @@ export class NameCard extends LitElement {
   static properties = {
     eng: { type: String },
     th: { type: String },
+    fbId: { type: String, attribute: "fb-id" },
+    isDebug: { type: Boolean, attribute: "is-debug" },
     _isSeqVisible: { state: true },
   };
 
@@ -43,6 +45,7 @@ export class NameCard extends LitElement {
           ${this.eng} : ${this.th}
           ${this._isSeqVisible ? html`<span class="h4">&#x25B2;</span>` : html`<span class="h4">&#x25BC;</span>`}
         </h1>
+        ${this.isDebug ? html`<p>ID: ${this.fbId}</p>` : ""}
         ${this._isSeqVisible ? seq : ""}
       </div>
     </div>`;
