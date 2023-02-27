@@ -3,6 +3,7 @@ import {
   html,
   css,
   styleMap,
+  classMap,
 } from "https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js";
 
 // Import the functions you need from the SDKs you need
@@ -21,12 +22,19 @@ import {
   GoogleAuthProvider,
   setPersistence,
   browserSessionPersistence,
+  onAuthStateChanged,
 } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
 
 import "./characters/sequence.js";
 import "./name-card.js";
 
 export class NamesApp extends LitElement {
+  static properties = {
+    _page: { state: true },
+    _names: { state: true },
+    _user: { state: true },
+  };
+
   constructor() {
     super();
 
@@ -40,15 +48,24 @@ export class NamesApp extends LitElement {
       measurementId: "G-43GJZF4RC1",
     };
 
+    // Application reactive states.
+    this._page = "home";
+    this._names = [];
+    this._user = null;
     // Application states.
-    this.page = "new-pair";
-    this.names = [];
     this.namesSnapshot = new Array();
-    this.user = null;
     // Firebase stuff.
     this.app = initializeApp(firebaseConfig);
     this.analytics = getAnalytics(this.app);
     this.db = getFirestore(this.app);
+    this.auth = getAuth(this.app);
+    onAuthStateChanged(this.auth, (user) => {
+      if (user) {
+        this._user = user;
+      } else {
+        this._user = null;
+      }
+    });
 
     // Reading query params
     // https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
@@ -56,7 +73,7 @@ export class NamesApp extends LitElement {
       get: (searchParams, prop) => searchParams.get(prop),
     });
     if (this.queryParams.page) {
-      this.page = this.queryParams.page;
+      this._page = this.queryParams.page;
       console.log("[info] page: " + this.queryParams.page);
     }
 
@@ -124,13 +141,10 @@ export class NamesApp extends LitElement {
     const result = this.fuse.search(this.engNameField.value).filter((e) => {
       return e.score <= 0.4;
     });
-    this.names = result;
-    this.requestUpdate();
+    this._names = result;
   }
 
   _signInClicked(event) {
-    // FIXME: Persistant login. Or at least across refresh.
-    // Maybe domain miss-match?
     const provider = new GoogleAuthProvider();
     const auth = getAuth(this.app);
     setPersistence(auth, browserSessionPersistence).then(() => {
@@ -140,7 +154,7 @@ export class NamesApp extends LitElement {
           const credential = GoogleAuthProvider.credentialFromResult(result);
           const token = credential.accessToken;
           // The signed-in user info.
-          this.user = result.user;
+          this._user = result.user;
           // IdP data available using getAdditionalUserInfo(result)
           // ...
         })
@@ -155,6 +169,15 @@ export class NamesApp extends LitElement {
           // ...
           console.log("[firebase] signin error");
         });
+    });
+  }
+
+  _signOutClicked(event) {
+    const auth = getAuth(this.app);
+    signOut(auth).then(() => {
+      console.log("[firebase] signout successful");
+    }).catch((error) => {
+      console.log("[firebase] signout error");
     });
   }
 
@@ -176,6 +199,15 @@ export class NamesApp extends LitElement {
   }
 
   renderNavBar() {
+
+    const home_classes = {
+      "nav-link": true,
+      "active": this._page === "home"
+    };
+    const new_pair_classes = {
+      "nav-link": true,
+      "active": this._page === "new-pair"
+    };
     return html`<nav class="navbar navbar-expand-lg bg-primary">
       <div class="container">
         <a class="navbar-brand" href="#">Names</a>
@@ -193,13 +225,14 @@ export class NamesApp extends LitElement {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="?page=home"
+              <a class=${classMap(home_classes)} aria-current="page" href="?page=home"
                 >Lookup</a
               >
             </li>
+            ${this._user ? html`
             <li class="nav-item">
-              <a class="nav-link" href="?page=new-pair">Add</a>
-            </li>
+              <a class=${classMap(new_pair_classes)} href="?page=new-pair">Add</a>
+            </li>` : ""}
           </ul>
           <div class="navbar-nav d-flex nav-item dropdown">
             <a
@@ -212,20 +245,23 @@ export class NamesApp extends LitElement {
               Other
             </a>
             <ul class="dropdown-menu">
+              ${!this._user ? html`
               <li>
-                <a @click=${this._signInClicked} class="dropdown-item"
-                  >Sign in</a
-                >
-              </li>
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
+              <a @click=${this._signInClicked} class="dropdown-item"
+                >Sign in</a
+              >
+            </li>
+            <li>
+              <hr class="dropdown-divider" />
+            </li>
+              ` : ""}
+              
               <li>
                 <a @click=${this._refreshNamesSnapshot} class="dropdown-item"
                   >Refresh</a
                 >
               </li>
-              <li><a class="dropdown-item disabled" href="#">Logout</a></li>
+              ${this._user ? html`<li><a @click=${this._signOutClicked} class="dropdown-item" href="#">Logout</a></li>` : ""}
             </ul>
           </div>
         </div>
@@ -234,7 +270,7 @@ export class NamesApp extends LitElement {
   }
 
   renderHomePage() {
-    const foundNames = this.names.map((name) => {
+    const foundNames = this._names.map((name) => {
       return html`<name-card
         eng=${name.item.engName}
         th=${name.item.thName}
@@ -252,12 +288,15 @@ export class NamesApp extends LitElement {
           />
         </div>
       </div>
-      ${this.names.length !== 0 ? foundNames : ""}`;
+      ${this._names.length !== 0 ? foundNames : ""}`;
   }
 
   renderNewPairPage() {
     return html`<div class="p-5 mt-4 mb-4 bg-light rounded-3">
       <div class="container-fluid">
+        <div class="mb-3">
+          <span class="badge bg-warning text-dark">Experimental Feature / Available to admin only</span>
+        </div>
         <div class="mb-3">
           <label for="new-pair-eng-name" class="form-label">English Name</label>
           <input
@@ -293,9 +332,9 @@ export class NamesApp extends LitElement {
     let navBarContent = this.renderNavBar();
 
     let pageContent = null;
-    if (this.page === "home") {
+    if (this._page === "home") {
       pageContent = this.renderHomePage();
-    } else if (this.page === "new-pair") {
+    } else if (this._page === "new-pair" && this._user) {
       pageContent = this.renderNewPairPage();
     } else {
       pageContent = this.renderHomePage();
