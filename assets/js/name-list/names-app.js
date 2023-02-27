@@ -297,6 +297,8 @@ export class NamesApp extends LitElement {
       pageContent = this.renderHomePage();
     } else if (this.page === "new-pair") {
       pageContent = this.renderNewPairPage();
+    } else {
+      pageContent = this.renderHomePage();
     }
 
     return html`${navBarContent}
