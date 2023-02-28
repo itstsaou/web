@@ -1,7 +1,5 @@
 import {
   LitElement,
-  html,
-  styleMap,
 } from "https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js";
 
 import { thMapping, maiEk, maiTho, maiTri } from "./th-mapping.js";

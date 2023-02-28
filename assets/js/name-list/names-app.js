@@ -1,9 +1,6 @@
 import {
   LitElement,
   html,
-  css,
-  styleMap,
-  classMap,
 } from "https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js";
 
 // Import the functions you need from the SDKs you need
@@ -27,6 +24,7 @@ import {
 
 import "./characters/sequence.js";
 import "./name-card.js";
+import "./nav-bar.js";
 
 export class NamesApp extends LitElement {
   static properties = {
@@ -206,78 +204,6 @@ export class NamesApp extends LitElement {
     console.log("new: " + this._debug);
   }
 
-  renderNavBar() {
-
-    const home_classes = {
-      "nav-link": true,
-      "active": this._page === "home"
-    };
-    const new_pair_classes = {
-      "nav-link": true,
-      "active": this._page === "new-pair"
-    };
-    return html`<nav class="navbar navbar-expand-lg bg-primary">
-      <div class="container">
-        <a class="navbar-brand" href="#">Names</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class=${classMap(home_classes)} aria-current="page" href="?page=home"
-                >Lookup</a
-              >
-            </li>
-            ${this._user ? html`
-            <li class="nav-item">
-              <a class=${classMap(new_pair_classes)} href="?page=new-pair">Add</a>
-            </li>` : ""}
-          </ul>
-          <div class="navbar-nav d-flex nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Other
-            </a>
-            <ul class="dropdown-menu">
-              ${!this._user ? html`
-              <li>
-              <a @click=${this._signInClicked} class="dropdown-item"
-                >Sign in</a
-              >
-            </li>
-            <li>
-              <hr class="dropdown-divider" />
-            </li>
-              ` : ""}
-              
-              <li>
-                <a @click=${this._refreshNamesSnapshot} class="dropdown-item"
-                  >Refresh</a
-                >
-              </li>
-              ${this._user ? html`<li><a @click=${this._toggleDebugClicked} class="dropdown-item" href="#">Toggle Debug</a></li>` : ""}
-              ${this._user ? html`<li><a @click=${this._signOutClicked} class="dropdown-item" href="#">Logout</a></li>` : ""}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </nav>`;
-  }
-
   renderHomePage() {
     const foundNames = this._names.map((name) => {
       return html`<name-card
@@ -340,8 +266,6 @@ export class NamesApp extends LitElement {
   }
 
   render() {
-    let navBarContent = this.renderNavBar();
-
     let pageContent = null;
     if (this._page === "home") {
       pageContent = this.renderHomePage();
@@ -351,7 +275,8 @@ export class NamesApp extends LitElement {
       pageContent = this.renderHomePage();
     }
 
-    return html`${navBarContent}
+    return html`
+      <nav-bar page=${this._page} ?is-user-login=${this._user} @signin-click=${this._signInClicked} @signout-click=${this._signOutClicked} @debug-click=${this._toggleDebugClicked}></nav-bar>
       <main>
         <div class="container">${pageContent}</div>
       </main>`;
