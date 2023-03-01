@@ -138,7 +138,7 @@ export class NavBar extends LitElement {
 
               <li>
                 <a @click=${this._refreshClicked} class="dropdown-item" href="#"
-                  >Refresh</a
+                  >Refresh Local DB</a
                 >
               </li>
               ${this.isUserLogin

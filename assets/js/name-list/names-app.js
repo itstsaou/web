@@ -208,9 +208,7 @@ export class NamesApp extends LitElement {
   }
 
   _toggleDebugClicked(event) {
-    console.log("old: " + this._debug);
     this._debug = this._debug ? false : true;
-    console.log("new: " + this._debug);
   }
 
   _isAllThaiChars(text) {
@@ -231,6 +229,10 @@ export class NamesApp extends LitElement {
     this._filter = newFilter.toLowerCase();
   }
 
+  removeExtendedSearchOperators(text) {
+    return text.replace(/[=$'!^.]/, "");
+  }
+
   renderHomePage() {
     let content;
     let textVal = this.engNameField?.value || "";
@@ -243,7 +245,9 @@ export class NamesApp extends LitElement {
       </div>`;
     } else if (this._names.length === 0 && textVal.length !== 0) {
       // Show the add button. For now tho, a link to Google Translate.
-      const googleTranslateLink = `https://translate.google.com/?hl=en&tab=wT&sl=en&tl=th&text=${textVal}&op=translate`;
+      const googleTranslateLink = `https://translate.google.com/?hl=en&tab=wT&sl=en&tl=th&text=${this.removeExtendedSearchOperators(
+        textVal
+      )}&op=translate`;
       content = html`<div class="p-3 p-md-5 my-2 my-md-4 bg-light rounded-3">
         <div class="container-fluid">
           <p>
@@ -393,7 +397,7 @@ export class NamesApp extends LitElement {
       <div class="container-fluid">
         <div class="mb-3">
           <span class="badge bg-warning text-dark"
-            >Experimental Feature / Available to admin only</span
+            >Experimental Feature / Available to staffs only</span
           >
         </div>
         <div class="mb-3">
