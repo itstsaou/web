@@ -31,8 +31,17 @@ export class ThaiCharacter extends LitElement {
       strokeMiterlimit: 4,
       strokeOpacity: 1,
     };
-    const renderFunc = thMapping[this.name] || thMapping["none"];
+    const renderFunc = this.getRenderFunc(this.name);
     return renderFunc(styles);
+  }
+
+  getRenderFunc(name) {
+    const basicLookupResult = thMapping[name];
+    if (!basicLookupResult) {
+      // Plan for codePointAt look up.
+      return thMapping["unknown"];
+    }
+    return basicLookupResult;
   }
 
   getFrameCount(character) {
@@ -57,6 +66,8 @@ export class ThaiCharacter extends LitElement {
     } else if (character === "ู") {
       return 80;
     } else if (character === "ั") {
+      return 80;
+    } else if (character === "์") {
       return 80;
     } else {
       // default number of frames.

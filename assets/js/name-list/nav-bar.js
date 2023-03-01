@@ -123,7 +123,10 @@ export class NavBar extends LitElement {
               ${!this.isUserLogin
                 ? html`
                     <li>
-                      <a @click=${this._signInClicked} class="dropdown-item"
+                      <a
+                        @click=${this._signInClicked}
+                        class="dropdown-item"
+                        href="#"
                         >Sign in</a
                       >
                     </li>

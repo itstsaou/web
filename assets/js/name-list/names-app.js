@@ -236,13 +236,24 @@ export class NamesApp extends LitElement {
     let textVal = this.engNameField?.value || "";
     if (this._isAllThaiChars(textVal) && textVal.length !== 0) {
       // Show the drawing directly.
-      content = html`<div class="p-5 mb-4 bg-light rounded-3">
+      content = html`<div class="p-3 p-md-5 my-2 my-md-4 bg-light rounded-3">
         <div class="container-fluid">
           <a-sequence value=${textVal} lang="th"></a-sequence>
         </div>
       </div>`;
-    } else if (this._names.length === 0) {
-      // Show the add button.
+    } else if (this._names.length === 0 && textVal.length !== 0) {
+      // Show the add button. For now tho, a link to Google Translate.
+      const googleTranslateLink = `https://translate.google.com/?hl=en&tab=wT&sl=en&tl=th&text=${textVal}&op=translate`;
+      content = html`<div class="p-3 p-md-5 my-2 my-md-4 bg-light rounded-3">
+        <div class="container-fluid">
+          <p>
+            No mapping found in our database, you can try
+            <a href=${googleTranslateLink} target="_blank" rel="noopener"
+              >Google's Translate</a
+            >
+          </p>
+        </div>
+      </div>`;
     } else if (this._names.length !== 0) {
       // Show the search result.
       content = this._names.map((name) => {
@@ -265,6 +276,14 @@ export class NamesApp extends LitElement {
             @keyup=${this.debounce(this._engNameChanged, 700)}
           />
         </div>
+        <div class="d-flex flex-row justify-content-end">
+          <a
+            href="https://fusejs.io/examples.html#extended-search"
+            target="_blank"
+            rel="noopener"
+            >About advanced search operators</a
+          >
+        </div>
       </div>
       ${content}`;
   }
@@ -279,8 +298,6 @@ export class NamesApp extends LitElement {
         ?is-debug=${this._debug}
       ></name-card>`;
     });
-
-    console.log(result);
     return html`<div class="p-3 p-md-2 my-2 my-md-4 bg-light rounded-3">
         <div class="container-fluid">
           <ul
