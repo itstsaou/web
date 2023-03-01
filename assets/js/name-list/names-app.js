@@ -352,7 +352,7 @@ export class NamesApp extends LitElement {
             href="https://fusejs.io/examples.html#extended-search"
             target="_blank"
             rel="noopener"
-            >About advanced search operators</a
+            >About search ops</a
           >
         </div>
       </div>
