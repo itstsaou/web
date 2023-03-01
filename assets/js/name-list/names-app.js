@@ -35,6 +35,7 @@ export class NamesApp extends LitElement {
     _debug: { state: true },
     _shouldUseAltDisplay: { state: true },
     _filter: { state: true },
+    _placeholder: { state: true },
   };
 
   constructor() {
@@ -82,7 +83,43 @@ export class NamesApp extends LitElement {
       console.log("[info] page: " + this.queryParams.page);
     }
 
+    // Cycle Names.
+    this.placeHolderNames = [
+      "Hedy Lamarr",
+      "Jeffrey Shane",
+      "Pittaya Paladroi-Shane",
+      "Margaret Elaine Hamilton",
+      "Annie Easley",
+      "Hermione Granger",
+      "Eula",
+      "Gladys West",
+      "Alan Turing",
+      "Leslie Lamport",
+      "Elizabeth Feinler",
+    ];
+    this._placeholder =
+      this.placeHolderNames[
+        Math.floor(Math.random() * this.placeHolderNames.length)
+      ];
+
     this.loadNameSnapshot();
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this._placeholderIntervalId = setInterval(() => {
+      this._placeholder =
+        this.placeHolderNames[
+          Math.floor(Math.random() * this.placeHolderNames.length)
+        ];
+    }, 2 * 60 * 1000);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    if (this._placeholderIntervalId) {
+      clearInterval(this._placeholderIntervalId);
+    }
   }
 
   async loadNameSnapshot() {
@@ -285,6 +322,7 @@ export class NamesApp extends LitElement {
         ></name-card>`;
       });
     }
+
     return html`<div class="p-3 p-md-5 my-2 my-md-4 bg-light rounded-3">
         <div class="container-fluid">
           <label for="eng-name" class="form-label">English Name</label>
@@ -292,7 +330,7 @@ export class NamesApp extends LitElement {
             type="text"
             class="form-control"
             id="eng-name"
-            placeholder="Fiona"
+            placeholder=${this._placeholder}
             @keyup=${this.debounce(this._engNameChanged, 700)}
           />
         </div>
@@ -303,6 +341,7 @@ export class NamesApp extends LitElement {
               type="checkbox"
               role="switch"
               id="should-use-alt-display-siwtch"
+              ?checked=${this._shouldUseAltDisplay}
               @change=${this._toggleAltDisplayClicked}
             />
             <label class="form-check-label" for="should-use-alt-display-siwtch"
