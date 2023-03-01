@@ -32,6 +32,7 @@ export class NamesApp extends LitElement {
     _names: { state: true },
     _user: { state: true },
     _debug: { state: true },
+    _filter: { state: true },
   };
 
   constructor() {
@@ -52,6 +53,7 @@ export class NamesApp extends LitElement {
     this._names = [];
     this._user = null;
     this._debug = false;
+    this._filter = "A";
     // Application states.
     this.namesSnapshot = new Array();
     // Firebase stuff.
@@ -93,6 +95,7 @@ export class NamesApp extends LitElement {
     }
 
     const options = {
+      useExtendedSearch: true,
       isCaseSensitive: false,
       includeScore: true,
       keys: ["engName", "thName"],
@@ -105,7 +108,7 @@ export class NamesApp extends LitElement {
     const querySnapshot = await getDocs(collection(this.db, "names"));
     querySnapshot.forEach((doc) => {
       const data = doc.data();
-      snapshot.push({id: doc.id, ...data});
+      snapshot.push({ id: doc.id, ...data });
     });
     return snapshot;
   }
@@ -135,6 +138,10 @@ export class NamesApp extends LitElement {
 
   get newPairThNameField() {
     return this.renderRoot?.querySelector("#new-pair-th-name") ?? null;
+  }
+
+  _pageChanged(event) {
+    this._page = event.detail.newPage || "home";
   }
 
   _engNameChanged(event) {
@@ -174,11 +181,13 @@ export class NamesApp extends LitElement {
 
   _signOutClicked(event) {
     const auth = getAuth(this.app);
-    signOut(auth).then(() => {
-      console.log("[firebase] signout successful");
-    }).catch((error) => {
-      console.log("[firebase] signout error");
-    });
+    signOut(auth)
+      .then(() => {
+        console.log("[firebase] signout successful");
+      })
+      .catch((error) => {
+        console.log("[firebase] signout error");
+      });
   }
 
   async _addNewPairClicked(event) {
@@ -207,11 +216,19 @@ export class NamesApp extends LitElement {
   _isAllThaiChars(text) {
     for (let i = 0; i < text.length; i++) {
       let codePoint = text.charCodeAt(i);
-      if (codePoint < 0x0e00 || codePoint > 0x0e5c) {
+      if (
+        text.charAt(i) !== " " &&
+        (codePoint < 0x0e00 || codePoint > 0x0e5c)
+      ) {
         return false;
       }
     }
     return true;
+  }
+
+  _filterChanged(event) {
+    const newFilter = event.target.dataset.filter || "A";
+    this._filter = newFilter.toLowerCase();
   }
 
   renderHomePage() {
@@ -220,10 +237,13 @@ export class NamesApp extends LitElement {
     if (this._isAllThaiChars(textVal) && textVal.length !== 0) {
       // Show the drawing directly.
       content = html`<div class="p-5 mb-4 bg-light rounded-3">
-      <div class="container-fluid"><a-sequence value=${textVal} lang="th"></a-sequence></div></div>`;
+        <div class="container-fluid">
+          <a-sequence value=${textVal} lang="th"></a-sequence>
+        </div>
+      </div>`;
     } else if (this._names.length === 0) {
       // Show the add button.
-    } else if (this._names.length !== 0){
+    } else if (this._names.length !== 0) {
       // Show the search result.
       content = this._names.map((name) => {
         return html`<name-card
@@ -234,7 +254,7 @@ export class NamesApp extends LitElement {
         ></name-card>`;
       });
     }
-    return html`<div class="p-5 mt-4 mb-4 bg-light rounded-3">
+    return html`<div class="p-3 p-md-5 my-2 my-md-4 bg-light rounded-3">
         <div class="container-fluid">
           <label for="eng-name" class="form-label">English Name</label>
           <input
@@ -249,11 +269,115 @@ export class NamesApp extends LitElement {
       ${content}`;
   }
 
+  renderListPage() {
+    const result = this.fuse.search("^" + this._filter);
+    const content = result.map((name) => {
+      return html`<name-card
+        eng=${name.item.engName}
+        th=${name.item.thName}
+        fb-id=${name.item.id}
+        ?is-debug=${this._debug}
+      ></name-card>`;
+    });
+
+    console.log(result);
+    return html`<div class="p-3 p-md-2 my-2 my-md-4 bg-light rounded-3">
+        <div class="container-fluid">
+          <ul
+            style="list-style: none; overflow: scroll;"
+            class="d-flex flex-row"
+          >
+            <li class="mx-1 p-1">
+              <a @click=${this._filterChanged} href="#" data-filter="A">A</a>
+            </li>
+            <li class="mx-1 p-1">
+              <a @click=${this._filterChanged} href="#" data-filter="B">B</a>
+            </li>
+            <li class="mx-1 p-1">
+              <a @click=${this._filterChanged} href="#" data-filter="C">C</a>
+            </li>
+            <li class="mx-1 p-1">
+              <a @click=${this._filterChanged} href="#" data-filter="D">D</a>
+            </li>
+            <li class="mx-1 p-1">
+              <a @click=${this._filterChanged} href="#" data-filter="E">E</a>
+            </li>
+            <li class="mx-1 p-1">
+              <a @click=${this._filterChanged} href="#" data-filter="F">F</a>
+            </li>
+            <li class="mx-1 p-1">
+              <a @click=${this._filterChanged} href="#" data-filter="G">G</a>
+            </li>
+            <li class="mx-1 p-1">
+              <a @click=${this._filterChanged} href="#" data-filter="H">H</a>
+            </li>
+            <li class="mx-1 p-1">
+              <a @click=${this._filterChanged} href="#" data-filter="I">I</a>
+            </li>
+            <li class="mx-1 p-1">
+              <a @click=${this._filterChanged} href="#" data-filter="J">J</a>
+            </li>
+            <li class="mx-1 p-1">
+              <a @click=${this._filterChanged} href="#" data-filter="K">K</a>
+            </li>
+            <li class="mx-1 p-1">
+              <a @click=${this._filterChanged} href="#" data-filter="L">L</a>
+            </li>
+            <li class="mx-1 p-1">
+              <a @click=${this._filterChanged} href="#" data-filter="M">M</a>
+            </li>
+            <li class="mx-1 p-1">
+              <a @click=${this._filterChanged} href="#" data-filter="N">N</a>
+            </li>
+            <li class="mx-1 p-1">
+              <a @click=${this._filterChanged} href="#" data-filter="O">O</a>
+            </li>
+            <li class="mx-1 p-1">
+              <a @click=${this._filterChanged} href="#" data-filter="P">P</a>
+            </li>
+            <li class="mx-1 p-1">
+              <a @click=${this._filterChanged} href="#" data-filter="Q">Q</a>
+            </li>
+            <li class="mx-1 p-1">
+              <a @click=${this._filterChanged} href="#" data-filter="R">R</a>
+            </li>
+            <li class="mx-1 p-1">
+              <a @click=${this._filterChanged} href="#" data-filter="S">S</a>
+            </li>
+            <li class="mx-1 p-1">
+              <a @click=${this._filterChanged} href="#" data-filter="T">T</a>
+            </li>
+            <li class="mx-1 p-1">
+              <a @click=${this._filterChanged} href="#" data-filter="U">U</a>
+            </li>
+            <li class="mx-1 p-1">
+              <a @click=${this._filterChanged} href="#" data-filter="V">V</a>
+            </li>
+            <li class="mx-1 p-1">
+              <a @click=${this._filterChanged} href="#" data-filter="W">W</a>
+            </li>
+            <li class="mx-1 p-1">
+              <a @click=${this._filterChanged} href="#" data-filter="X">X</a>
+            </li>
+            <li class="mx-1 p-1">
+              <a @click=${this._filterChanged} href="#" data-filter="Y">Y</a>
+            </li>
+            <li class="mx-1 p-1">
+              <a @click=${this._filterChanged} href="#" data-filter="Z">Z</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      ${content}`;
+  }
+
   renderNewPairPage() {
-    return html`<div class="p-5 mt-4 mb-4 bg-light rounded-3">
+    return html`<div class="p-3 p-md-5 my-2 my-md-4 bg-light rounded-3">
       <div class="container-fluid">
         <div class="mb-3">
-          <span class="badge bg-warning text-dark">Experimental Feature / Available to admin only</span>
+          <span class="badge bg-warning text-dark"
+            >Experimental Feature / Available to admin only</span
+          >
         </div>
         <div class="mb-3">
           <label for="new-pair-eng-name" class="form-label">English Name</label>
@@ -292,12 +416,21 @@ export class NamesApp extends LitElement {
       pageContent = this.renderHomePage();
     } else if (this._page === "new-pair" && this._user) {
       pageContent = this.renderNewPairPage();
+    } else if (this._page === "list" && this._user) {
+      pageContent = this.renderListPage();
     } else {
       pageContent = this.renderHomePage();
     }
 
-    return html`
-      <nav-bar page=${this._page} ?is-user-login=${this._user} @signin-click=${this._signInClicked} @signout-click=${this._signOutClicked} @debug-click=${this._toggleDebugClicked}></nav-bar>
+    return html`<nav-bar
+        page=${this._page}
+        ?is-user-login=${this._user}
+        @page-change=${this._pageChanged}
+        @signin-click=${this._signInClicked}
+        @signout-click=${this._signOutClicked}
+        @refresh-click=${this._refreshNamesSnapshot}
+        @debug-click=${this._toggleDebugClicked}
+      ></nav-bar>
       <main>
         <div class="container">${pageContent}</div>
       </main>`;

@@ -12,36 +12,56 @@ export class NavBar extends LitElement {
 
   constructor() {
     super();
-
   }
 
   createRenderRoot() {
     return this;
   }
 
+  _pageChanged(event) {
+    const newPage = event.target.dataset.page || "home";
+    if (newPage !== this.page) {
+      const e = new CustomEvent("page-change", {
+        detail: { newPage: newPage },
+        bubbles: true,
+        composed: true,
+      });
+      this.dispatchEvent(e);
+    }
+  }
+
   _signInClicked(event) {
-    const e = new Event("signin-click", {bubbles: true, composed: true});
+    const e = new Event("signin-click", { bubbles: true, composed: true });
     this.dispatchEvent(e);
   }
 
   _signOutClicked(event) {
-    const e = new Event("signout-click", {bubbles: true, composed: true});
+    const e = new Event("signout-click", { bubbles: true, composed: true });
+    this.dispatchEvent(e);
+  }
+
+  _refreshClicked(event) {
+    const e = new Event("refresh-click", { bubbles: true, composed: true });
     this.dispatchEvent(e);
   }
 
   _toggleDebugClicked(event) {
-    const e = new Event("debug-click", {bubbles: true, composed: true});
+    const e = new Event("debug-click", { bubbles: true, composed: true });
     this.dispatchEvent(e);
   }
 
   render() {
     const home_classes = {
       "nav-link": true,
-      "active": this.page === "home"
+      active: this.page === "home",
+    };
+    const list_classes = {
+      "nav-link": true,
+      active: this.page === "list",
     };
     const new_pair_classes = {
       "nav-link": true,
-      "active": this.page === "new-pair"
+      active: this.page === "new-pair",
     };
     return html`<nav class="navbar navbar-expand-lg bg-primary">
       <div class="container">
@@ -60,14 +80,34 @@ export class NavBar extends LitElement {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class=${classMap(home_classes)} aria-current="page" href="?page=home"
+              <a
+                class=${classMap(home_classes)}
+                @click=${this._pageChanged}
+                data-page="home"
+                href="#"
                 >Lookup</a
               >
             </li>
-            ${this.isUserLogin ? html`
             <li class="nav-item">
-              <a class=${classMap(new_pair_classes)} href="?page=new-pair">Add</a>
-            </li>` : ""}
+              <a
+                class=${classMap(list_classes)}
+                @click=${this._pageChanged}
+                data-page="list"
+                href="#"
+                >List</a
+              >
+            </li>
+            ${this.isUserLogin
+              ? html` <li class="nav-item">
+                  <a
+                    class=${classMap(new_pair_classes)}
+                    @click=${this._pageChanged}
+                    data-page="new-pair"
+                    href="#"
+                    >Add</a
+                  >
+                </li>`
+              : ""}
           </ul>
           <div class="navbar-nav d-flex nav-item dropdown">
             <a
@@ -80,30 +120,50 @@ export class NavBar extends LitElement {
               Other
             </a>
             <ul class="dropdown-menu">
-              ${!this.isUserLogin ? html`
+              ${!this.isUserLogin
+                ? html`
+                    <li>
+                      <a @click=${this._signInClicked} class="dropdown-item"
+                        >Sign in</a
+                      >
+                    </li>
+                    <li>
+                      <hr class="dropdown-divider" />
+                    </li>
+                  `
+                : ""}
+
               <li>
-              <a @click=${this._signInClicked} class="dropdown-item"
-                >Sign in</a
-              >
-            </li>
-            <li>
-              <hr class="dropdown-divider" />
-            </li>
-              ` : ""}
-              
-              <li>
-                <a @click=${this._refreshNamesSnapshot} class="dropdown-item"
+                <a @click=${this._refreshClicked} class="dropdown-item" href="#"
                   >Refresh</a
                 >
               </li>
-              ${this.isUserLogin ? html`<li><a @click=${this._toggleDebugClicked} class="dropdown-item" href="#">Toggle Debug</a></li>` : ""}
-              ${this.isUserLogin ? html`<li><a @click=${this._signOutClicked} class="dropdown-item" href="#">Logout</a></li>` : ""}
+              ${this.isUserLogin
+                ? html`<li>
+                    <a
+                      @click=${this._toggleDebugClicked}
+                      class="dropdown-item"
+                      href="#"
+                      >Toggle Debug</a
+                    >
+                  </li>`
+                : ""}
+              ${this.isUserLogin
+                ? html`<li>
+                    <a
+                      @click=${this._signOutClicked}
+                      class="dropdown-item"
+                      href="#"
+                      >Logout</a
+                    >
+                  </li>`
+                : ""}
             </ul>
           </div>
         </div>
       </div>
     </nav>`;
   }
-};
+}
 
 customElements.define("nav-bar", NavBar);

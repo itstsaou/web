@@ -37,11 +37,13 @@ export class NameCard extends LitElement {
 
   render() {
     const seq = html`<a-sequence value=${this.th} lang="th"></a-sequence>`;
-    return html`<div class="p-5 mb-4 bg-light rounded-3">
+    return html`<div class="p-3 p-md-5 mb-2 mb-md-4 bg-light rounded-3">
       <div class="container-fluid">
         <h1 @click=${this._toggleSeqVisibility}>
           ${this.eng} : ${this.th}
-          ${this._isSeqVisible ? html`<span class="h4">&#x25B2;</span>` : html`<span class="h4">&#x25BC;</span>`}
+          ${this._isSeqVisible
+            ? html`<span class="h4">&#x25B2;</span>`
+            : html`<span class="h4">&#x25BC;</span>`}
         </h1>
         ${this.isDebug ? html`<p>ID: ${this.fbId}</p>` : ""}
         ${this._isSeqVisible ? seq : ""}
