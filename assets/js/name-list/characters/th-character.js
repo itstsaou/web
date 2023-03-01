@@ -13,9 +13,8 @@ export class ThaiCharacter extends LitElement {
   constructor() {
     super();
     this.name = "none";
-    this.loop = true;
+    // this.loop = true;
     this.duration = 200;
-    this.classes = { loop: this.loop };
 
     this.animator = null;
     this.loopingTimer = null;

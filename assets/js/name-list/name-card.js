@@ -3,7 +3,7 @@ import {
   html,
 } from "https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js";
 
-import "./characters/sequence.js";
+import "./characters/a-sequence.js";
 
 export class NameCard extends LitElement {
   static properties = {

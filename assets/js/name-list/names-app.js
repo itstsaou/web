@@ -22,7 +22,8 @@ import {
   onAuthStateChanged,
 } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
 
-import "./characters/sequence.js";
+import "./characters/a-sequence.js";
+import "./characters/all-sequence.js";
 import "./name-card.js";
 import "./nav-bar.js";
 
@@ -240,7 +241,7 @@ export class NamesApp extends LitElement {
       // Show the drawing directly.
       content = html`<div class="p-3 p-md-5 my-2 my-md-4 bg-light rounded-3">
         <div class="container-fluid">
-          <a-sequence value=${textVal} lang="th"></a-sequence>
+          <all-sequence value=${textVal} lang="th"></all-sequence>
         </div>
       </div>`;
     } else if (this._names.length === 0 && textVal.length !== 0) {
