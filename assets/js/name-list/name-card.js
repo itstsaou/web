@@ -4,6 +4,7 @@ import {
 } from "https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js";
 
 import "./characters/a-sequence.js";
+import "./characters/all-sequence.js";
 
 export class NameCard extends LitElement {
   static properties = {
@@ -11,6 +12,7 @@ export class NameCard extends LitElement {
     th: { type: String },
     fbId: { type: String, attribute: "fb-id" },
     isDebug: { type: Boolean, attribute: "is-debug" },
+    useAltDisplay: { type: Boolean, attribute: "use-alt-display" },
     _isSeqVisible: { state: true },
   };
 
@@ -36,7 +38,12 @@ export class NameCard extends LitElement {
   }
 
   render() {
-    const seq = html`<a-sequence value=${this.th} lang="th"></a-sequence>`;
+    let seq;
+    if (this.useAltDisplay) {
+      seq = html`<all-sequence value=${this.th} lang="th"></all-sequence>`;
+    } else {
+      seq = html`<a-sequence value=${this.th} lang="th"></a-sequence>`;
+    }
     return html`<div class="p-3 p-md-5 mb-2 mb-md-4 bg-light rounded-3">
       <div class="container-fluid">
         <h1 @click=${this._toggleSeqVisibility}>

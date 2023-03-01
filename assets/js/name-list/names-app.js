@@ -33,6 +33,7 @@ export class NamesApp extends LitElement {
     _names: { state: true },
     _user: { state: true },
     _debug: { state: true },
+    _shouldUseAltDisplay: { state: true },
     _filter: { state: true },
   };
 
@@ -54,6 +55,7 @@ export class NamesApp extends LitElement {
     this._names = [];
     this._user = null;
     this._debug = false;
+    this._shouldUseAltDisplay = false;
     this._filter = "A";
     // Application states.
     this.namesSnapshot = new Array();
@@ -212,6 +214,10 @@ export class NamesApp extends LitElement {
     this._debug = this._debug ? false : true;
   }
 
+  _toggleAltDisplayClicked(event) {
+    this._shouldUseAltDisplay = this._shouldUseAltDisplay ? false : true;
+  }
+
   _isAllThaiChars(text) {
     for (let i = 0; i < text.length; i++) {
       let codePoint = text.charCodeAt(i);
@@ -239,9 +245,17 @@ export class NamesApp extends LitElement {
     let textVal = this.engNameField?.value || "";
     if (this._isAllThaiChars(textVal) && textVal.length !== 0) {
       // Show the drawing directly.
+      const altDisplay = html`<all-sequence
+        value=${textVal}
+        lang="th"
+      ></all-sequence>`;
+      const normDisplay = html`<a-sequence
+        value=${textVal}
+        lang="th"
+      ></a-sequence>`;
       content = html`<div class="p-3 p-md-5 my-2 my-md-4 bg-light rounded-3">
         <div class="container-fluid">
-          <all-sequence value=${textVal} lang="th"></all-sequence>
+          ${this._shouldUseAltDisplay ? altDisplay : normDisplay}
         </div>
       </div>`;
     } else if (this._names.length === 0 && textVal.length !== 0) {
@@ -267,6 +281,7 @@ export class NamesApp extends LitElement {
           th=${name.item.thName}
           fb-id=${name.item.id}
           ?is-debug=${this._debug}
+          ?use-alt-display=${this._shouldUseAltDisplay}
         ></name-card>`;
       });
     }
@@ -282,6 +297,18 @@ export class NamesApp extends LitElement {
           />
         </div>
         <div class="d-flex flex-row justify-content-end">
+          <div class="form-check form-switch mx-1">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="should-use-alt-display-siwtch"
+              @change=${this._toggleAltDisplayClicked}
+            />
+            <label class="form-check-label" for="should-use-alt-display-siwtch"
+              >Alt Display?</label
+            >
+          </div>
           <a
             href="https://fusejs.io/examples.html#extended-search"
             target="_blank"
@@ -301,6 +328,7 @@ export class NamesApp extends LitElement {
         th=${name.item.thName}
         fb-id=${name.item.id}
         ?is-debug=${this._debug}
+        ?use-alt-display=${this._shouldUseAltDisplay}
       ></name-card>`;
     });
     return html`<div class="p-3 p-md-2 my-2 my-md-4 bg-light rounded-3">
