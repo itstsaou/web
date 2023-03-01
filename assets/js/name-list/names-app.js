@@ -433,7 +433,7 @@ export class NamesApp extends LitElement {
       pageContent = this.renderHomePage();
     } else if (this._page === "new-pair" && this._user) {
       pageContent = this.renderNewPairPage();
-    } else if (this._page === "list" && this._user) {
+    } else if (this._page === "list") {
       pageContent = this.renderListPage();
     } else {
       pageContent = this.renderHomePage();
