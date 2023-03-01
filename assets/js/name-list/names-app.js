@@ -204,15 +204,36 @@ export class NamesApp extends LitElement {
     console.log("new: " + this._debug);
   }
 
+  _isAllThaiChars(text) {
+    for (let i = 0; i < text.length; i++) {
+      let codePoint = text.charCodeAt(i);
+      if (codePoint < 0x0e00 || codePoint > 0x0e5c) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   renderHomePage() {
-    const foundNames = this._names.map((name) => {
-      return html`<name-card
-        eng=${name.item.engName}
-        th=${name.item.thName}
-        fb-id=${name.item.id}
-        ?is-debug=${this._debug}
-      ></name-card>`;
-    });
+    let content;
+    let textVal = this.engNameField?.value || "";
+    if (this._isAllThaiChars(textVal) && textVal.length !== 0) {
+      // Show the drawing directly.
+      content = html`<div class="p-5 mb-4 bg-light rounded-3">
+      <div class="container-fluid"><a-sequence value=${textVal} lang="th"></a-sequence></div></div>`;
+    } else if (this._names.length === 0) {
+      // Show the add button.
+    } else if (this._names.length !== 0){
+      // Show the search result.
+      content = this._names.map((name) => {
+        return html`<name-card
+          eng=${name.item.engName}
+          th=${name.item.thName}
+          fb-id=${name.item.id}
+          ?is-debug=${this._debug}
+        ></name-card>`;
+      });
+    }
     return html`<div class="p-5 mt-4 mb-4 bg-light rounded-3">
         <div class="container-fluid">
           <label for="eng-name" class="form-label">English Name</label>
@@ -225,7 +246,7 @@ export class NamesApp extends LitElement {
           />
         </div>
       </div>
-      ${this._names.length !== 0 ? foundNames : ""}`;
+      ${content}`;
   }
 
   renderNewPairPage() {
