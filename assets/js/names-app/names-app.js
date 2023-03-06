@@ -420,7 +420,22 @@ export class NamesApp extends LitElement {
     } else if (this._page === "list") {
       pageContent = this.renderListPage();
     } else if (this._page === "share") {
-      pageContent = html`<share-page></share-page>`;
+      // Reading query params
+      // https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
+      this.queryParams = new Proxy(new URLSearchParams(window.location.search), {
+        get: (searchParams, prop) => searchParams.get(prop),
+      });
+      let srcName;
+      if (this.queryParams.name) {
+        srcName = this.queryParams.name;
+      }
+      const results = this.fuse.search("^" + srcName);
+      if (results.length !== 0) {
+        const nameObj = results.at(0);
+        pageContent = html`<share-page src-name=${srcName} dst-name=${nameObj.item.thName}></share-page>`;
+      } else {
+        pageContent = html`<share-page src-name=${srcName} ></share-page>`;
+      }
     } else {
       pageContent = this.renderHomePage();
     }
