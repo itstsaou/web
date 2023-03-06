@@ -1,5 +1,5 @@
 ---
-layout: name-app
-nav-slug: name-app
-title: Names
+layout: names-app
+nav-slug: names-app
+title: Names App
 ---
