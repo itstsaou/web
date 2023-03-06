@@ -27,6 +27,7 @@ import "./characters/all-sequence.js";
 import "./name-card.js";
 import "./nav-bar.js";
 import "./list-page.js";
+import "./share-page.js";
 
 export class NamesApp extends LitElement {
   static properties = {
@@ -73,6 +74,12 @@ export class NamesApp extends LitElement {
         this._user = null;
       }
     });
+
+    // Replace the '#' out from visible url.
+    if (window.location.hash.length > 1) {
+      const path = window.location.hash.replace('#', '')
+      history.pushState({}, "Names", '/names' + path)
+    }
 
     // Reading query params
     // https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
@@ -412,6 +419,8 @@ export class NamesApp extends LitElement {
       pageContent = this.renderNewPairPage();
     } else if (this._page === "list") {
       pageContent = this.renderListPage();
+    } else if (this._page === "share") {
+      pageContent = html`<share-page></share-page>`;
     } else {
       pageContent = this.renderHomePage();
     }
