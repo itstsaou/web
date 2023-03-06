@@ -26,6 +26,7 @@ import "./characters/a-sequence.js";
 import "./characters/all-sequence.js";
 import "./name-card.js";
 import "./nav-bar.js";
+import "./list-page.js";
 
 export class NamesApp extends LitElement {
   static properties = {
@@ -269,7 +270,7 @@ export class NamesApp extends LitElement {
   }
 
   _filterChanged(event) {
-    const newFilter = event.target.dataset.filter || "A";
+    const newFilter = event.detail.newFilter || "A";
     this._filter = newFilter.toLowerCase();
   }
 
@@ -360,104 +361,8 @@ export class NamesApp extends LitElement {
   }
 
   renderListPage() {
-    const result = this.fuse.search("^" + this._filter);
-    const content = result.map((name) => {
-      return html`<name-card
-        eng=${name.item.engName}
-        th=${name.item.thName}
-        fb-id=${name.item.id}
-        ?is-debug=${this._debug}
-        ?use-alt-display=${this._shouldUseAltDisplay}
-      ></name-card>`;
-    });
-    return html`<div class="p-3 p-md-2 my-2 my-md-4 bg-light rounded-3">
-        <div class="container-fluid">
-          <ul
-            style="list-style: none; overflow: scroll;"
-            class="d-flex flex-row"
-          >
-            <li class="mx-1 p-1">
-              <a @click=${this._filterChanged} href="#" data-filter="A">A</a>
-            </li>
-            <li class="mx-1 p-1">
-              <a @click=${this._filterChanged} href="#" data-filter="B">B</a>
-            </li>
-            <li class="mx-1 p-1">
-              <a @click=${this._filterChanged} href="#" data-filter="C">C</a>
-            </li>
-            <li class="mx-1 p-1">
-              <a @click=${this._filterChanged} href="#" data-filter="D">D</a>
-            </li>
-            <li class="mx-1 p-1">
-              <a @click=${this._filterChanged} href="#" data-filter="E">E</a>
-            </li>
-            <li class="mx-1 p-1">
-              <a @click=${this._filterChanged} href="#" data-filter="F">F</a>
-            </li>
-            <li class="mx-1 p-1">
-              <a @click=${this._filterChanged} href="#" data-filter="G">G</a>
-            </li>
-            <li class="mx-1 p-1">
-              <a @click=${this._filterChanged} href="#" data-filter="H">H</a>
-            </li>
-            <li class="mx-1 p-1">
-              <a @click=${this._filterChanged} href="#" data-filter="I">I</a>
-            </li>
-            <li class="mx-1 p-1">
-              <a @click=${this._filterChanged} href="#" data-filter="J">J</a>
-            </li>
-            <li class="mx-1 p-1">
-              <a @click=${this._filterChanged} href="#" data-filter="K">K</a>
-            </li>
-            <li class="mx-1 p-1">
-              <a @click=${this._filterChanged} href="#" data-filter="L">L</a>
-            </li>
-            <li class="mx-1 p-1">
-              <a @click=${this._filterChanged} href="#" data-filter="M">M</a>
-            </li>
-            <li class="mx-1 p-1">
-              <a @click=${this._filterChanged} href="#" data-filter="N">N</a>
-            </li>
-            <li class="mx-1 p-1">
-              <a @click=${this._filterChanged} href="#" data-filter="O">O</a>
-            </li>
-            <li class="mx-1 p-1">
-              <a @click=${this._filterChanged} href="#" data-filter="P">P</a>
-            </li>
-            <li class="mx-1 p-1">
-              <a @click=${this._filterChanged} href="#" data-filter="Q">Q</a>
-            </li>
-            <li class="mx-1 p-1">
-              <a @click=${this._filterChanged} href="#" data-filter="R">R</a>
-            </li>
-            <li class="mx-1 p-1">
-              <a @click=${this._filterChanged} href="#" data-filter="S">S</a>
-            </li>
-            <li class="mx-1 p-1">
-              <a @click=${this._filterChanged} href="#" data-filter="T">T</a>
-            </li>
-            <li class="mx-1 p-1">
-              <a @click=${this._filterChanged} href="#" data-filter="U">U</a>
-            </li>
-            <li class="mx-1 p-1">
-              <a @click=${this._filterChanged} href="#" data-filter="V">V</a>
-            </li>
-            <li class="mx-1 p-1">
-              <a @click=${this._filterChanged} href="#" data-filter="W">W</a>
-            </li>
-            <li class="mx-1 p-1">
-              <a @click=${this._filterChanged} href="#" data-filter="X">X</a>
-            </li>
-            <li class="mx-1 p-1">
-              <a @click=${this._filterChanged} href="#" data-filter="Y">Y</a>
-            </li>
-            <li class="mx-1 p-1">
-              <a @click=${this._filterChanged} href="#" data-filter="Z">Z</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      ${content}`;
+    const items = this.fuse.search("^" + this._filter);
+    return html`<list-page @filter-change=${this._filterChanged} filter=${this._filter} .items=${items}></list-page>`;
   }
 
   renderNewPairPage() {
