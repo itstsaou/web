@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: " en-US" }}">
+
+<head>
+    <meta charset="UTF-8">
+
+    {% seo %}
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" as="style"
+        type="text/css" crossorigin>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <script type="text/javascript"
+        src="{{ '/assets/js/qr-gen/jquery.min.js?v=' | append: site.github.build_revision | relative_url }}"></script>
+    <script type="text/javascript"
+        src="{{ '/assets/js/qr-gen/qrcode.min.js?v=' | append: site.github.build_revision | relative_url }}"></script>
+
+
+    {% include head-custom.html %}
+</head>
+
+<body>
+    <main id="content" class="main-content" role="main">
+        <input id="text" type="text" value="https://tsaou.page/" style="width:80%" /><br />
+        <div id="qrcode" style="width:200px; height:200px; margin-top:15px;"></div>
+    </main>
+    <script type="text/javascript">
+        var qrcode = new QRCode(document.getElementById("qrcode"));
+
+        function makeCode() {
+            var elText = document.getElementById("text");
+
+            if (!elText.value) {
+                alert("Input a text");
+                elText.focus();
+                return;
+            }
+
+            qrcode.makeCode(elText.value);
+        }
+
+        makeCode();
+
+        $("#text").
+            on("blur", function () {
+                makeCode();
+            }).
+            on("keydown", function (e) {
+                if (e.keyCode == 13) {
+                    makeCode();
+                }
+            });
+    </script>
+</body>
+
+</html>
