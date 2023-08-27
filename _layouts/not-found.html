@@ -6,7 +6,9 @@
   <body></body>
   <script>
    if (window.location.pathname.indexOf("/names") !== -1) {
-      window.location.href = 'tools/names/#' + window.location.pathname.replace('tools/names', '')
+    if (window.location.pathname.indexOf("/names/#") !== -1) {
+      window.location.href = 'tools/names/#' + window.location.pathname.replace('tools/names', '');
+    }
    }
   </script>
 </html>
