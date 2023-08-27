@@ -7,7 +7,7 @@
   <script>
    if (window.location.pathname.indexOf("/names") !== -1) {
     if (window.location.hash === "") {
-      window.location.href = 'tools/names/#' + window.location.pathname.replace('tools/names', '');
+      window.location.href = '#' + window.location.pathname.replace('/tools/names/', '');
     }
    }
   </script>
