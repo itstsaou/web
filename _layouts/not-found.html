@@ -5,6 +5,8 @@
   </head>
   <body></body>
   <script>
-    window.location.href = '/names/#' + window.location.pathname.replace('/names', '')
+   if (window.location.pathname.indexOf("/names") !== -1) {
+      window.location.href = 'tools/names/#' + window.location.pathname.replace('tools/names', '')
+   }
   </script>
 </html>
