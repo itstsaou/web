@@ -78,7 +78,7 @@ export class NamesApp extends LitElement {
     // Replace the '#' out from visible url.
     if (window.location.hash.length > 1) {
       const path = window.location.hash.replace('#', '')
-      history.pushState({}, "Names", '/names' + path)
+      history.pushState({}, "Names", '/tools/names/' + path)
     }
 
     // Reading query params
