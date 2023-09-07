@@ -19,7 +19,7 @@
       <div class="p-5 mb-4 bg-light rounded-3">
         <h2>{{ exec_board.name }}</h2>
         <p>{{ exec_board.short_list | markdownify }}</p>
-        <a href="{{ exec_board.url }}">Detail</a>
+        <a href="{{ exec_board.url }}" class="btn btn-outline-secondary">Detail</a>
       </div>
     {% endfor %}
   
