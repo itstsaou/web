@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: " en-US" }}">
+{% include head.html %}
+
+<body>
+  {% include nav.html %}
+
+  <main>
+    <div class="container">
+      <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid">
+          <h1>{{ page.title }}</h1>
+          <p class="col-md-8 fs-4">{{ page.description }}</p>
+        </div>
+      </div>
+
+    {% assign sorted_exec_boards = site.exec_boards | sort: "begin_date" | reverse %}
+    {% for exec_board in sorted_exec_boards  %}
+      <div class="p-5 mb-4 bg-light rounded-3">
+        <h2>{{ exec_board.name }}</h2>
+        <p>{{ exec_board.short_list | markdownify }}</p>
+        <a href="{{ exec_board.url }}">Detail</a>
+      </div>
+    {% endfor %}
+  
+      <footer class="pt-3 mt-4 text-muted border-top">OU Thai Student Association</footer>
+    </div>
+  </main>
+</body>
+
+</html>
