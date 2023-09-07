@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'en-US' }}">
+  <head>
+    <meta charset="UTF-8" />
+
+    {% seo %}
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#157878" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap"
+      as="style"
+      type="text/css"
+      crossorigin
+    />
+    <link
+      rel="stylesheet"
+      href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}"
+    />
+    <script src="{{ '/assets/js/bootstrap.bundle.min.js?v=' | append: site.github.build_revision | relative_url }}"></script>
+
+    <link
+      rel="stylesheet"
+      href="{{ '/assets/css/thai-keyboard/index.css?v=' | append: site.github.build_revision | relative_url }}"
+    />
+    <script
+      type="text/javascript"
+      src="{{ '/assets/js/thai-keyboard/index.modern.js?v=' | append: site.github.build_revision | relative_url }}"
+    ></script>
+
+    <!--
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/css/index.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/index.js"></script>
+    -->
+
+    <style>
+      .simple-keyboard {
+        max-width: 850px;
+      }
+    </style>
+
+    {% include head-custom.html %}
+  </head>
+
+  <body>
+    {% include nav.html %}
+    <main id="content" class="main-content" role="main">
+      <div class="container">
+        <div class="p-5 mb-4 bg-light-subtle rounded-3">
+          <div class="container-fluid">
+            <h1>{{ page.title }}</h1>
+            <p class="col-md-8 fs-4">{{ page.description }}</p>
+          </div>
+        </div>
+        <div class="p-5 mb-4 bg-light-subtle rounded-3">
+          <div class="mb-3">
+            <label for="text" class="form-label">Content</label>
+            <input
+              id="text"
+              class="form-control"
+              placeholder="Tap on the virtual keyboard to start"
+            />
+          </div>
+          <a
+            class="btn btn-outline-danger mb-3"
+            href="#"
+            role="button"
+            id="clearBtn"
+            >Clear</a
+          >
+          <a class="btn btn-primary mb-3" href="#" role="button" id="copyBtn"
+            >Copy</a
+          >
+          <div class="simple-keyboard"></div>
+          <p>
+            Built with
+            <a href="https://hodgef.com/simple-keyboard/" target="_blank"
+              >simple-keyboard</a
+            >
+          </p>
+        </div>
+        <footer class="pt-3 mt-4 text-muted border-top">
+          OU Thai Student Association
+        </footer>
+      </div>
+    </main>
+    <script type="text/javascript">
+      let Keyboard = window.SimpleKeyboard.default;
+      let thaiLayout = {
+        layout: {
+          default: [
+            "\u005F \u0E45 \u002F \u002D \u0E20 \u0E16 \u0E38 \u0E36 \u0E04 \u0E15 \u0E08 \u0E02 \u0E0A {bksp}",
+            "{tab} \u0E46 \u0E44 \u0E33 \u0E1E \u0E30 \u0E31 \u0E35 \u0E23 \u0E19 \u0E22 \u0E1A \u0E25 \u0E03",
+            "{lock} \u0E1F \u0E2B \u0E01 \u0E14 \u0E40 \u0E49 \u0E48 \u0E32 \u0E2A \u0E27 \u0E07 {enter}",
+            "{shift} \u0E1C \u0E1B \u0E41 \u0E2D \u0E34 \u0E37 \u0E17 \u0E21 \u0E43 \u0E1D {shift}",
+            ".com @ {space}",
+          ],
+          shift: [
+            "% + \u0E51 \u0E52 \u0E53 \u0E54 \u0E39 \u0E3F \u0E55 \u0E56 \u0E57 \u0E58 \u0E59 {bksp}",
+            "{tab} \u0E50 \u0022 \u0E0E \u0E11 \u0E18 \u0E4D \u0E4A \u0E13 \u0E2F \u0E0D \u0E10 \u002C \u0E05",
+            "{lock} \u0E24 \u0E06 \u0E0F \u0E42 \u0E0C \u0E47 \u0E4B \u0E29 \u0E28 \u0E0B \u002E {enter}",
+            "{shift} ( ) \u0E09 \u0E2E \u0E3A \u0E4C \u003F \u0E12 \u0E2C \u0E26 {shift}",
+            ".com @ {space}",
+          ],
+        },
+      };
+
+      let keyboard = new Keyboard({
+        onChange: (input) => onChange(input),
+        onKeyPress: (button) => onKeyPress(button),
+        ...thaiLayout,
+      });
+
+      /**
+       * Update simple-keyboard when input is changed directly
+       */
+      document.querySelector("#text").addEventListener("input", (event) => {
+        keyboard.setInput(event.target.value);
+      });
+
+      console.log(keyboard);
+
+      async function copyContent() {
+        try {
+          await navigator.clipboard.writeText(
+            document.querySelector("#text").value
+          );
+          console.log("Content copied to clipboard");
+        } catch (err) {
+          console.error("Failed to copy: ", err);
+        }
+      }
+      document.querySelector("#copyBtn").addEventListener("click", copyContent);
+      document.querySelector("#clearBtn").addEventListener("click", (event) => {
+        keyboard.clearInput();
+        document.querySelector("#text").value = "";
+      });
+
+      function onChange(input) {
+        document.querySelector("#text").value = input;
+        console.log("Input changed", input);
+      }
+
+      function onKeyPress(button) {
+        console.log("Button pressed", button);
+
+        /**
+         * If you want to handle the shift and caps lock buttons
+         */
+        if (button === "{shift}" || button === "{lock}") handleShift();
+      }
+
+      function handleShift() {
+        let currentLayout = keyboard.options.layoutName;
+        let shiftToggle = currentLayout === "default" ? "shift" : "default";
+
+        keyboard.setOptions({
+          layoutName: shiftToggle,
+        });
+      }
+    </script>
+  </body>
+</html>
