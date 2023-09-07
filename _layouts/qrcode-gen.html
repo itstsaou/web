@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'en-US' }}">
+  <head>
+    <meta charset="UTF-8" />
+
+    {% seo %}
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#157878" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap"
+      as="style"
+      type="text/css"
+      crossorigin
+    />
+    <link
+      rel="stylesheet"
+      href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}"
+    />
+    <script src="{{ '/assets/js/bootstrap.bundle.min.js?v=' | append: site.github.build_revision | relative_url }}"></script>
+
+    <script
+      type="text/javascript"
+      src="{{ '/assets/js/qrcode-gen/jquery.min.js?v=' | append: site.github.build_revision | relative_url }}"
+    ></script>
+    <script
+      type="text/javascript"
+      src="{{ '/assets/js/qrcode-gen/qrcode.min.js?v=' | append: site.github.build_revision | relative_url }}"
+    ></script>
+
+    {% include head-custom.html %}
+  </head>
+
+  <body>
+    {% include nav.html %}
+    <main id="content" class="main-content" role="main">
+      <div class="container">
+        <div class="p-5 mb-4 bg-light-subtle rounded-3">
+          <div class="container-fluid">
+            <h1>{{ page.title }}</h1>
+            <p class="col-md-8 fs-4">{{ page.description }}</p>
+          </div>
+        </div>
+        <div class="p-5 mb-4 bg-light-subtle rounded-3">
+          <div class="mb-3">
+            <label for="text" class="form-label">Text Content</label>
+            <textarea class="form-control" id="text" rows="3">
+https://tsaou.page/</textarea
+            >
+          </div>
+          <div class="mb-3" style="width: 50%">
+            <label for="widthRange" class="form-label">Width</label>
+            <input
+              type="range"
+              class="form-range"
+              id="widthRange"
+              min="100"
+              max="800"
+              step="50"
+              value="550"
+            />
+            <p id="width-current-value">550</p>
+          </div>
+          <div class="mb-3" style="width: 50%">
+            <label for="heightRange" class="form-label">Height</label>
+            <input
+              type="range"
+              class="form-range"
+              id="heightRange"
+              min="100"
+              max="800"
+              step="50"
+              value="550"
+            />
+            <p id="height-current-value">550</p>
+          </div>
+          <a class="btn btn-primary" href="#" role="button" id="generateBtn"
+            >Generate</a
+          >
+
+          <div id="qrcode" style="margin-top: 15px; height: 800px"></div>
+          <p>
+            Built with
+            <a href="https://davidshimjs.github.io/qrcodejs/" target="_blank"
+              >qrcode.js</a
+            >
+          </p>
+        </div>
+        <footer class="pt-3 mt-4 text-muted border-top">
+          OU Thai Student Association
+        </footer>
+      </div>
+    </main>
+    <script type="text/javascript">
+      const textEle = document.getElementById("text");
+      const generateBtn = document.querySelector("#generateBtn");
+      const widthRange = document.querySelector("#widthRange");
+      const heightRange = document.querySelector("#heightRange");
+
+      const widthValueTxt = document.querySelector("#width-current-value");
+      const heightValueTxt = document.querySelector("#height-current-value");
+
+      function makeCode() {
+        if (!textEle.value) {
+          return;
+        }
+
+        // Clear the element.
+        // We clear it since qrcode.js does not seem to be able to
+        // Adjust the size of the QR code on the fly.
+        const displayEle = document.querySelector("#qrcode");
+        displayEle.innerHTML = "";
+        // Create new code.
+        const qrcode = new QRCode(document.getElementById("qrcode"), {
+          text: textEle.value,
+          width: widthRange.value,
+          height: heightRange.value,
+        });
+      }
+
+      function parseSearchParams() {
+        // FIXME: If the text is a URL, the search param of that URL
+        // will be ignored.
+        const urlParams = window.location.search;
+        const getQuery = urlParams.split("?")[1] || "";
+        const rawParams = getQuery.split("&");
+        var params = {};
+        for (var param of rawParams) {
+          const tokens = param.split("=");
+          params[tokens[0]] = decodeURI(tokens[1]);
+        }
+        return params;
+      }
+
+      // Try to update the text box with 'text' param from the URL.
+      params = parseSearchParams();
+      textEle.value = params["text"] || "https://tsaou.page/";
+
+      makeCode();
+
+      // Listen for when to (re)generate.
+      generateBtn.addEventListener("click", (event) => {
+        makeCode();
+      });
+
+      // Update and show width and height values.
+      widthRange.addEventListener("input", (event) => {
+        widthValueTxt.textContent = event.target.value;
+      });
+      heightRange.addEventListener("input", (event) => {
+        heightValueTxt.textContent = event.target.value;
+      });
+    </script>
+  </body>
+</html>
