@@ -46,6 +46,21 @@
       .simple-keyboard {
         max-width: 850px;
       }
+      .key-zoom-0 {
+        font-size: inherit;
+      }
+      .key-zoom-1 {
+        font-size: 1.2em;
+      }
+      .key-zoom-2 {
+        font-size: 1.5em;
+      }
+      .key-zoom-3 {
+        font-size: 1.7em;
+      }
+      .key-zoom-4 {
+        font-size: 1.9em;
+      }
     </style>
 
     {% include head-custom.html %}
@@ -61,7 +76,7 @@
             <p class="col-md-8 fs-4">{{ page.description }}</p>
           </div>
         </div>
-        <div class="p-5 mb-4 bg-light-subtle rounded-3">
+        <div class="p-md-5 mb-4 bg-light-subtle rounded-3">
           <div class="mb-3">
             <label for="text" class="form-label">Content</label>
             <input
@@ -81,6 +96,20 @@
             >Copy</a
           >
           <div class="simple-keyboard"></div>
+          <a
+            class="btn btn-primary mb-3"
+            href="#"
+            role="button"
+            id="enlargeKeyBtn"
+            ><i class="fa-solid fa-magnifying-glass-plus"></i></i
+          ></a>
+          <a
+            class="btn btn-primary mb-3"
+            href="#"
+            role="button"
+            id="minifyKeyBtn"
+            ><i class="fa-solid fa-magnifying-glass-minus"></i></i
+          ></a>
           <p>
             Built with
             <a href="https://hodgef.com/simple-keyboard/" target="_blank"
@@ -143,6 +172,30 @@
       document.querySelector("#clearBtn").addEventListener("click", (event) => {
         keyboard.clearInput();
         document.querySelector("#text").value = "";
+      });
+      
+      let zoomLevel = 0;
+      document.querySelector("#enlargeKeyBtn").addEventListener("click", (event) => {
+        const rows = document.querySelectorAll(".hg-row");
+        rows.forEach(element => {
+          element.classList.remove(`key-zoom-${zoomLevel}`);
+        });
+        zoomLevel++;
+        if (zoomLevel > 4) {zoomLevel = 4;}
+        rows.forEach(element => {
+          element.classList.add(`key-zoom-${zoomLevel}`);
+        });
+      });
+      document.querySelector("#minifyKeyBtn").addEventListener("click", (event) => {
+        const rows = document.querySelectorAll(".hg-row");
+        rows.forEach(element => {
+          element.classList.remove(`key-zoom-${zoomLevel}`);
+        });
+        zoomLevel--;
+        if (zoomLevel < 0) {zoomLevel = 0;}
+        rows.forEach(element => {
+          element.classList.add(`key-zoom-${zoomLevel}`);
+        });
       });
 
       function onChange(input) {
