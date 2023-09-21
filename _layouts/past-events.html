@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: " en-US" }}">
+{% include head.html %}
+
+<body>
+  {% include nav.html %}
+
+  <main>
+    <div class="container">
+      <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+              <li class="breadcrumb-item"><a href="/events">Events</a></li>
+              <li class="breadcrumb-item active" aria-current="page">{{ page.title }}</li>
+            </ol>
+          </nav>
+          <h1>{{ page.title }}</h1>
+          <p class="col-md-8 fs-4">{{ page.description }}</p>
+        </div>
+      </div>
+
+      {% assign past_events = site.events | where_exp: "event", "event.begin < site.time" | sort: "begin_date" | reverse %}
+      {% for event in past_events  %}
+      <div class="p-5 mb-4 bg-light rounded-3">
+        <h2>{{ event.title }}</h2>
+        <p>{{ event.short_description | markdownify }}</p>
+        <a href="{{ event.url }}" class="btn btn-outline-secondary">Detail</a>
+      </div>
+      {% endfor %}
+  
+      <footer class="pt-3 mt-4 text-muted border-top">OU Thai Student Association</footer>
+    </div>
+  </main>
+</body>
+
+</html>

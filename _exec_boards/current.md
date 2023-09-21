@@ -1,8 +1,7 @@
 ---
-layout: default
+layout: exec-board-detail
 title: Current Executive Board
 begin_date: 2023-08-28
-name: Current
 short_list: |
   **President:** Angelina Goniea-Richards  
   **Vice President:** Saruda Seeharit  

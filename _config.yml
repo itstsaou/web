@@ -9,3 +9,6 @@ sass:
 collections:
   exec_boards:
     output: true
+  events:
+    output: true
+future: true
