@@ -9,7 +9,9 @@ short_description: |
 published: true
 ---
 
-**This is event is hosted by CIS**
+**No meeting this week, but we will be participating in this event.**
 
 There is no meeting this week, but we will be joinning CIS in the CIS World Languages - Welcoming Potluck Party.
 Come join us and learn about Thai's ghosts and ghosts from around the world!
+
+Note: This is event is hosted by CIS
