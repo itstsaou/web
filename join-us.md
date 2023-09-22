@@ -5,7 +5,7 @@ title: Join Us!
 description: Want to participate? Help build our community or just browsing around
 ---
 
-## Connect with us in-person
+## Hangout with us in-person
 
 We meet bi-weekly on Wednesday at 6pm in [Baker University Center](https://maps.app.goo.gl/YmD6boBLSczFRMKK8) Room 230.
 The room may be changed depending on the event we have, but usually you will find us there!
