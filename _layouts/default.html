@@ -1,24 +1,21 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: " en-US" }}">
-{% include head.html %}
+<html lang="{{ site.lang | default: 'en-US' }}">
+  {% include head.html %}
 
-<body>
-  {% include nav.html %}
+  <body>
+    {% include nav.html %}
 
-  <main>
-    <div class="container">
-      <div class="p-5 mb-4 bg-light rounded-3">
-        <div class="container-fluid">
-          <h1>{{ page.title }}</h1>
-          <p class="col-md-8 fs-4">{{ page.description }}</p>
+    <main>
+      <div class="container">
+        <div class="p-5 mb-4 bg-light rounded-3">
+          <div class="container-fluid">
+            <h1>{{ page.title }}</h1>
+            <p class="col-md-8 fs-4">{{ page.description }}</p>
+          </div>
         </div>
+        <div class="p-5 mb-4 bg-light rounded-3">{{ content }}</div>
+        {% include footer.html %}
       </div>
-      <div class="p-5 mb-4 bg-light rounded-3">
-        {{ content }}
-      </div>
-      {% include footer.html %}
-    </div>
-  </main>
-</body>
-
+    </main>
+  </body>
 </html>

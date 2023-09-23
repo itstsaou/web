@@ -1,31 +1,30 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: " en-US" }}">
-{% include head.html %}
+<html lang="{{ site.lang | default: 'en-US' }}">
+  {% include head.html %}
 
-<body>
-  {% include nav.html %}
+  <body>
+    {% include nav.html %}
 
-  <main>
-    <div class="container">
-      <div class="p-5 mb-4 bg-light rounded-3">
-        <div class="container-fluid">
-          <h1>{{ page.title }}</h1>
-          <p class="col-md-8 fs-4">{{ page.description }}</p>
+    <main>
+      <div class="container">
+        <div class="p-5 mb-4 bg-light rounded-3">
+          <div class="container-fluid">
+            <h1>{{ page.title }}</h1>
+            <p class="col-md-8 fs-4">{{ page.description }}</p>
+          </div>
         </div>
-      </div>
 
-    {% assign sorted_exec_boards = site.exec_boards | sort: "begin_date" | reverse %}
-    {% for exec_board in sorted_exec_boards  %}
-      <div class="p-5 mb-4 bg-light rounded-3">
-        <h2>{{ exec_board.title }}</h2>
-        <p>{{ exec_board.short_list | markdownify }}</p>
-        <a href="{{ exec_board.url }}" class="btn btn-outline-secondary">Detail</a>
+        {% assign sorted_exec_boards = site.exec_boards | sort: "begin_date" |
+        reverse %} {% for exec_board in sorted_exec_boards %}
+        <div class="p-5 mb-4 bg-light rounded-3">
+          <h2>{{ exec_board.title }}</h2>
+          <p>{{ exec_board.short_list | markdownify }}</p>
+          <a href="{{ exec_board.url }}" class="btn btn-outline-secondary"
+            >Detail</a
+          >
+        </div>
+        {% endfor %} {% include footer.html %}
       </div>
-    {% endfor %}
-  
-    {% include footer.html %}
-    </div>
-  </main>
-</body>
-
+    </main>
+  </body>
 </html>
