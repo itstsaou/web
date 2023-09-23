@@ -4,88 +4,131 @@ nav-slug: home
 ---
 
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: " en-US" }}">
-{% include head.html %}
+<html lang="{{ site.lang | default: 'en-US' }}">
+  {% include head.html %}
 
-<body>
-  {% include nav.html %}
+  <body>
+    {% include nav.html %}
 
-  <main>
-    <div class="container">
-      <div class="p-5 mb-4 bg-light rounded-3">
-        <div class="container-fluid py-5">
-          <h1 class="display-5 fw-bold">Thai Student Association @ <a href="https://www.ohio.edu/" class="text-success" style="text-decoration: none;" target="_blank">OU</a></h1>
-          <p class="col-md-8 fs-4">We consist of Thai students, Thai language students and Thai community in Athens,
-            Ohio</p>
-          <a href="join-us.html" class="btn btn-primary btn-lg mb-2 mr-2">Join us!</a>
-          <a href="about.html" class="btn btn-outline-secondary btn-lg mb-2 mr-2">More about us</a>
-        </div>
-      </div>
-      <div class="row align-items-md-stretch mb-4">
-        <div class="col-md-6">
-          <div class="h-100 p-5 text-bg-secondary rounded-3">
-            <h2>Events</h2>
-            <p>Check out our current and past events</p>
-            <a href="events/" class="btn btn-outline-light">List of events</a>
+    <main>
+      <div class="container">
+        <div class="p-5 mb-4 bg-light rounded-3">
+          <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">
+              Thai Student Association @
+              <a
+                href="https://www.ohio.edu/"
+                class="text-success"
+                style="text-decoration: none"
+                target="_blank"
+                >OU</a
+              >
+            </h1>
+            <p class="col-md-8 fs-4">
+              We consist of Thai students, Thai language students and Thai
+              community in Athens, Ohio
+            </p>
+            <a href="join-us.html" class="btn btn-primary btn-lg mb-2 mr-2"
+              >Join us!</a
+            >
+            <a
+              href="about.html"
+              class="btn btn-outline-secondary btn-lg mb-2 mr-2"
+              >More about us</a
+            >
           </div>
         </div>
-        <div class="col-md-6">
-          <div class="h-100 p-5 bg-light border rounded-3">
-            <h2>Thai Classes</h2>
-            <p>Interested in learning Thai? Want to learn a new languge for your <a href="https://www.ohio.edu/cas/undergraduate/academic-requirements/foreign-language-requirement" target="_blank" rel="noopener">foreign language requirement</a>?</p>
-            <a href="thai-classes.html" class="btn btn-outline-secondary">More information</a>
+        <div class="row align-items-md-stretch mb-4">
+          <div class="col-md-6">
+            <div class="h-100 p-5 text-bg-secondary rounded-3">
+              <h2>Events</h2>
+              <p>Check out our current and past events</p>
+              <a href="events/" class="btn btn-outline-light">List of events</a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="h-100 p-5 bg-light border rounded-3">
+              <h2>Thai Classes</h2>
+              <p>
+                Interested in learning Thai? Want to learn a new languge for
+                your
+                <a
+                  href="https://www.ohio.edu/cas/undergraduate/academic-requirements/foreign-language-requirement"
+                  target="_blank"
+                  rel="noopener"
+                  >foreign language requirement</a
+                >?
+              </p>
+              <a href="thai-classes.html" class="btn btn-outline-secondary"
+                >More information</a
+              >
+            </div>
           </div>
         </div>
-      </div>
-      <div class="p-4 mb-4 bg-light rounded-3">
-        <div class="container-fluid py-5">
-          <h2>Current Executive Board</h2>
+        <div class="p-4 mb-4 bg-light rounded-3">
+          <div class="container-fluid py-5">
+            <h2>Current Executive Board</h2>
 
-          <div class="container-fluid d-flex flex-lg-row flex-column me-auto ">
-            <div class="card mb-4 me-2" style="width: 18rem;">
-              <img src="{{ 'assets/img/exec-boards/2023/angelina_goniea-richards.jpg' | relative_url }}" class="card-img-top" alt="portrait of the president of 2023 academic year">
-              <div class="card-body">
-                <h5 class="card-title">Angelina Goniea-Richards</h5>
-                <p class="card-text">President</p>
+            <div class="container-fluid d-flex flex-lg-row flex-column me-auto">
+              <div class="card mb-4 me-2" style="width: 18rem">
+                <img
+                  src="{{ 'assets/img/exec-boards/2023/angelina_goniea-richards.jpg' | relative_url }}"
+                  class="card-img-top"
+                  alt="portrait of the president of 2023 academic year"
+                />
+                <div class="card-body">
+                  <h5 class="card-title">Angelina Goniea-Richards</h5>
+                  <p class="card-text">President</p>
+                </div>
+              </div>
+              <div class="card mb-4 me-2" style="width: 18rem">
+                <img src="..." class="card-img-top" alt="..." />
+                <div class="card-body">
+                  <h5 class="card-title">Saruda Seeharit</h5>
+                  <p class="card-text">Vice President</p>
+                </div>
+              </div>
+              <div class="card mb-4 me-2" style="width: 18rem">
+                <img
+                  src="{{ 'assets/img/exec-boards/2022/krerkkiat_chusap.png' | relative_url  }}"
+                  class="card-img-top"
+                  alt="..."
+                />
+                <div class="card-body">
+                  <h5 class="card-title">Krerkkiat Chusap</h5>
+                  <p class="card-text">Treasurer</p>
+                </div>
+              </div>
+              <div class="card mb-4 me-2" style="width: 18rem">
+                <img
+                  src="{{ 'assets/img/exec-boards/2022/jeffrey-shane.jpg' | relative_url }}"
+                  class="card-img-top"
+                  alt="portrait of our faculty advisor"
+                />
+                <div class="card-body">
+                  <h5 class="card-title">Jeffrey Shane</h5>
+                  <p class="card-text">Faculty Advisor</p>
+                </div>
               </div>
             </div>
-            <div class="card mb-4 me-2" style="width: 18rem;">
-              <img src="..." class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Saruda Seeharit</h5>
-                <p class="card-text">Vice President</p>
-              </div>
-            </div>
-            <div class="card mb-4 me-2" style="width: 18rem;">
-              <img src="{{ 'assets/img/exec-boards/2022/krerkkiat_chusap.png' | relative_url  }}" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Krerkkiat Chusap</h5>
-                <p class="card-text">Treasurer</p>
-              </div>
-            </div>
-            <div class="card mb-4 me-2" style="width: 18rem;">
-              <img src="{{ 'assets/img/exec-boards/2022/jeffrey-shane.jpg' | relative_url }}" class="card-img-top" alt="portrait of our faculty advisor">
-              <div class="card-body">
-                <h5 class="card-title">Jeffrey Shane</h5>
-                <p class="card-text">Faculty Advisor</p>
-              </div>
+            <a href="exec-boards.html" class="btn btn-outline-secondary"
+              >View All Executive Boards</a
+            >
+          </div>
+        </div>
+        <div class="row align-items-md-stretch mb-4">
+          <div class="col-md-6">
+            <div class="h-100 p-5 text-bg-secondary rounded-3">
+              <h2>Tools</h2>
+              <p>Where our developer time have been sinking into 😂</p>
+              <a href="tools/" class="btn btn-outline-light"
+                >List of all tools</a
+              >
             </div>
           </div>
-          <a href="exec-boards.html" class="btn btn-outline-secondary">View All Executive Boards</a>
         </div>
+        {% include footer.html %}
       </div>
-      <div class="row align-items-md-stretch mb-4">
-        <div class="col-md-6">
-          <div class="h-100 p-5 text-bg-secondary rounded-3">
-            <h2>Tools</h2>
-            <p>Where our developer time have been sinking into 😂</p>
-            <a href="tools/" class="btn btn-outline-light">List of all tools</a>
-          </div>
-        </div>
-      </div>
-      <footer class="pt-3 mt-4 text-muted border-top">OU Thai Student Association</footer>
-    </div>
-  </main>
-</body>
-
+    </main>
+  </body>
 </html>
