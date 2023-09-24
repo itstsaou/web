@@ -2,7 +2,7 @@
 layout: default
 nav-slug: meeting-checklist
 title: Meeting Checklist
-description: Getting Things Done -- for real this time.
+description: Getting Things Done - for real this time 😂.
 ---
 
 ## A general body meeting / event
