@@ -1,11 +1,14 @@
 ---
 layout: event-detail
 title: 2020 Loy Krathong
-begin: 2020-10-31T17:00:00-4:00
-end: 2020-10-31T21:00:00-4:00
+begin: 2020-11-14T20:00:00-4:00
+end: 2020-11-14T21:30:00-4:00
 location: Online
 short_description: |
   Amid COVID-19 pandamic, we gathered together to celebrate Loy Krathong festival through the Internet.
+images:
+  - path: /assets/img/events/2020-11-14-loy-krathong/program.jpg
+    title: Event's Program
 ---
 
 Amid COVID-19 pandamic, we gathered together to celebrate Loy Krathong festival through the Internet.
