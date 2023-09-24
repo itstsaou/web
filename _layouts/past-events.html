@@ -28,6 +28,12 @@
         %}
         <div class="p-5 mb-4 bg-light rounded-3">
           <h2>{{ event.title }}</h2>
+          <p>
+            <span style="font-weight: bold">Date & Time:</span> {{ event.begin |
+            date: "%A, %B %d, %Y @ %l:%M %p"}}
+            <span style="font-weight: bold">Location:</span> {{ event.location
+            }}
+          </p>
           <p>{{ event.short_description | markdownify }}</p>
           <a href="{{ event.url }}" class="btn btn-outline-secondary">Detail</a>
         </div>
