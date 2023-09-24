@@ -3,13 +3,14 @@ layout: event-detail
 title: 2020 Loy Krathong
 begin: 2020-10-31T17:00:00-4:00
 end: 2020-10-31T21:00:00-4:00
+location: Online
 short_description: |
   Amid COVID-19 pandamic, we gathered together to celebrate Loy Krathong festival through the Internet.
 ---
 
 Amid COVID-19 pandamic, we gathered together to celebrate Loy Krathong festival through the Internet.
 
-You can still view our tutorial on how to make Krathong [here](https://youtu.be/NeIYROPveBs).
+You can still view our tutorial on [how to make a Krathong](https://youtu.be/NeIYROPveBs).
 
 **The Team**
 

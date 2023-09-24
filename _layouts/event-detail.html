@@ -19,11 +19,77 @@
               </ol>
             </nav>
             <h1>{{ page.title }}</h1>
+            <p>
+              <span style="font-weight: bold">Date & Time:</span> {{ page.begin
+              | date: "%A, %B %d, %Y @ %l:%M %p"}}
+              <span style="font-weight: bold">Location:</span> {{ page.location
+              }}
+            </p>
             <p class="col-md-8 fs-4">{{ page.description }}</p>
           </div>
         </div>
         <div class="p-5 mb-4 bg-light rounded-3">{{ content }}</div>
-        {% include footer.html %}
+        {% if page.images %}
+        <div class="p-5 mb-4 bg-light rounded-3">
+          <h2>Image Gallery</h2>
+          <p>{{ page.gallery_description }}</p>
+          <div id="carouselExampleCaptions" class="carousel slide">
+            <div class="carousel-indicators">
+              {% for image in page.images %}
+              <button
+                type="button"
+                data-bs-target="#carouselExampleCaptions"
+                data-bs-slide-to="{{ forloop.index0 }}"
+                class="{% if forloop.first %}active{% endif %}"
+                aria-current="{% if forloop.first %}true{% endif %}"
+                aria-label="Slide {{ forloop.index }}"
+              ></button>
+              {% endfor %}
+            </div>
+            <div class="carousel-inner">
+              {% for image in page.images %}
+              <div
+                class="carousel-item {% if forloop.first %}active{% endif %}"
+              >
+                <img
+                  src="{{ image.path }}"
+                  class="d-block w-100"
+                  alt="{{ image.description }}"
+                />
+                <div class="carousel-caption d-none d-md-block">
+                  <h5>{{ image.title }}</h5>
+                  <p>{{ image.description }}</p>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselExampleCaptions"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselExampleCaptions"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+        {% endif %} {% include footer.html %}
       </div>
     </main>
   </body>
