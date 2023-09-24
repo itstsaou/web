@@ -17,3 +17,8 @@ We are working hard on creating our history! For our past work, our research tea
 result is shining through.
 
 ## Contact Us
+
+Have a big bag of money you want to get rid of? Want to personally make a feature request to our developers?
+Wanting to complain about how hot Thailand is?
+
+You can reach out to us with your compliments 💖 at info /at/ tsaou {dot} page.

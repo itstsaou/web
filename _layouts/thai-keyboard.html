@@ -101,20 +101,36 @@
             href=""
             role="button"
             id="enlargeKeyBtn"
-            ><i class="fa-solid fa-magnifying-glass-plus"></i></i
+            ><i class="fa-solid fa-magnifying-glass-plus"></i
           ></a>
           <a
             class="btn btn-primary mb-3"
             href=""
             role="button"
             id="minifyKeyBtn"
-            ><i class="fa-solid fa-magnifying-glass-minus"></i></i
+            ><i class="fa-solid fa-magnifying-glass-minus"></i
           ></a>
           <p>
             Built with
             <a href="https://hodgef.com/simple-keyboard/" target="_blank"
               >simple-keyboard</a
-            >
+            >.
+          </p>
+          <p>
+            Like what we are doing?
+            <script
+              type="text/javascript"
+              src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js"
+              data-name="bmc-button"
+              data-slug="itstsaou"
+              data-color="#40DCA5"
+              data-emoji="🧋"
+              data-font="Cookie"
+              data-text="Buy us a thai iced tea"
+              data-outline-color="#000000"
+              data-font-color="#ffffff"
+              data-coffee-color="#FFDD00"
+            ></script>
           </p>
         </div>
         <footer class="pt-3 mt-4 text-muted border-top">
@@ -122,6 +138,7 @@
         </footer>
       </div>
     </main>
+
     <script type="text/javascript">
       let Keyboard = window.SimpleKeyboard.default;
       let thaiLayout = {
@@ -173,30 +190,38 @@
         keyboard.clearInput();
         document.querySelector("#text").value = "";
       });
-      
+
       let zoomLevel = 0;
-      document.querySelector("#enlargeKeyBtn").addEventListener("click", (event) => {
-        const rows = document.querySelectorAll(".hg-row");
-        rows.forEach(element => {
-          element.classList.remove(`key-zoom-${zoomLevel}`);
+      document
+        .querySelector("#enlargeKeyBtn")
+        .addEventListener("click", (event) => {
+          const rows = document.querySelectorAll(".hg-row");
+          rows.forEach((element) => {
+            element.classList.remove(`key-zoom-${zoomLevel}`);
+          });
+          zoomLevel++;
+          if (zoomLevel > 4) {
+            zoomLevel = 4;
+          }
+          rows.forEach((element) => {
+            element.classList.add(`key-zoom-${zoomLevel}`);
+          });
         });
-        zoomLevel++;
-        if (zoomLevel > 4) {zoomLevel = 4;}
-        rows.forEach(element => {
-          element.classList.add(`key-zoom-${zoomLevel}`);
+      document
+        .querySelector("#minifyKeyBtn")
+        .addEventListener("click", (event) => {
+          const rows = document.querySelectorAll(".hg-row");
+          rows.forEach((element) => {
+            element.classList.remove(`key-zoom-${zoomLevel}`);
+          });
+          zoomLevel--;
+          if (zoomLevel < 0) {
+            zoomLevel = 0;
+          }
+          rows.forEach((element) => {
+            element.classList.add(`key-zoom-${zoomLevel}`);
+          });
         });
-      });
-      document.querySelector("#minifyKeyBtn").addEventListener("click", (event) => {
-        const rows = document.querySelectorAll(".hg-row");
-        rows.forEach(element => {
-          element.classList.remove(`key-zoom-${zoomLevel}`);
-        });
-        zoomLevel--;
-        if (zoomLevel < 0) {zoomLevel = 0;}
-        rows.forEach(element => {
-          element.classList.add(`key-zoom-${zoomLevel}`);
-        });
-      });
 
       function onChange(input) {
         document.querySelector("#text").value = input;
