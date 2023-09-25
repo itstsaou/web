@@ -16,3 +16,13 @@ For exact detail please visit [Thai Visas for Americans](https://th.usembassy.go
 ## Geography
 
 ## Do and Don't
+
+The list of do and don't when you are in Thailand.
+
+**Do**
+
+
+
+**Don't**
+
+- Don't cross the road without looking.

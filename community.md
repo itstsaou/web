@@ -10,6 +10,19 @@ description: Community of Thais in Athens, Ohio
 
 ### Cook-your-own Route
 
+This is a challenging route you picked. However, nothing will prevent you from having your hand-made Thai food I see.
+
+The closest shop you can stop by and get Thai (or asian) ingredients is the "New Market" on East State Street.
+It is across from the Athens Community Center.
+
+If you have a car or a day-off, you can go to Columbus, Ohio which will open up more options. In Columbus, you can
+stop by
+
+- [Saraga International Grocery](https://maps.app.goo.gl/idKfsqrbL7CwkXnf9) on Morse Road.
+- [Bangkok Grocery & Restaurant](https://maps.app.goo.gl/6faeSzv9seA2qDxm9) on Refugee Road.
+
+for vast selection of the Thai food ingredients.
+
 ### Ready-to-eat Route
 
 If you are a hard working individual like our developers and do not have time to cook your own Thai food, here are

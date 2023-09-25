@@ -19,8 +19,12 @@ short_list: |
 
 **Favortie Things**
 
-- Thai food:
-- Thai fantasy novel:
+- Thai Food: ส้มตำ, ข้าวซอย, หมูสามชั้นทอดน้ำปลา
+- Thai Dessert: ขนมเบื้อง
+- Thai Songs: ลู่วิ่ง (Can't keep up) by Tilly Birds, กักตัว by Violette Wautier, ชอบตัวเองตอนอยู่กับเธอ by Billkin, ฤดูหนาว (Bangkok Winter) by Tilly Birds, ชอบอยู่คนเดี่ยว by Ink Waruntorn.
+- Thai Series / Series in Thai: Girl From Nowhere, Boys Over Flowers (TH version), Unlucky Ploy.
+- Thai Movies: I'm Fine Thank You Love you, Bad Genius, Happy Old Year.
+
 
 ## Vice President
 
@@ -39,7 +43,7 @@ short_list: |
 
 **Favortie Things**
 
-- Thai food:Boat noodles (ก๋วยเตี๋ยวเรือ)
+- Thai food: Boat noodles (ก๋วยเตี๋ยวเรือ)
 - Thai fantasy novel: SEVENA by Kalthida (เซวีน่า มหานครแห่งมนตรา โดย กัลฐิดา)
 
 
