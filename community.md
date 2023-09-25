@@ -26,8 +26,7 @@ for vast selection of the Thai food ingredients.
 ### Ready-to-eat Route
 
 If you are a hard working individual like our developers and do not have time to cook your own Thai food, here are
-the options we have in Athens, Ohio. This suggestion is not in particular order, but if you are donating
-to us, we can move it up or make the font bigger 😉.
+the options we have in Athens, Ohio. This suggestion is not in particular order.
 
 **Siam Thai**
 
