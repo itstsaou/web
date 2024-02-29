@@ -3,6 +3,7 @@ google_analytics: G-WQ161LH8W7
 google_ads: AW-390929899
 plugins:
   - jekyll-seo-tag
+  - jekyll-redirect-from
 sass:
   sass_dir: _sass
   style: compressed
