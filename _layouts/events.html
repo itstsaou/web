@@ -29,7 +29,7 @@
               }}
             </p>
             <p>{{ event.short_description | markdownify }}</p>
-            <a href="{{ event.url }}" class="btn btn-outline-secondary"
+            <a href="{{ event.url | relative_url }}" class="btn btn-outline-secondary"
               >Detail</a
             >
           </div>
@@ -40,7 +40,7 @@
           <h2>Past Events</h2>
           <p>Want to browse through our history instead?</p>
 
-          <a href="/events/past.html" class="btn btn-outline-secondary"
+          <a href="{{ site.baseurl }}/events/past.html" class="btn btn-outline-secondary"
             >List of all past events</a
           >
         </div>

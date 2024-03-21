@@ -11,13 +11,13 @@
           <div class="container-fluid">
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ site.baseurl }}">Home</a></li>
                 {% if event.begin >= site.time %}
-                <li class="breadcrumb-item"><a href="/events">Events</a></li>
+                <li class="breadcrumb-item"><a href="{{ site.baseurl }}/events">Events</a></li>
                 {% else %}
-                <li class="breadcrumb-item"><a href="/events">Events</a></li>
+                <li class="breadcrumb-item"><a href="{{ site.baseurl }}/events">Events</a></li>
                 <li class="breadcrumb-item">
-                  <a href="/events/past">Past Events</a>
+                  <a href="{{ site.baseurl }}/events/past">Past Events</a>
                 </li>
                 {% endif %}
                 <li class="breadcrumb-item active" aria-current="page">

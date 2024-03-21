@@ -18,35 +18,35 @@
           <a
             class="nav-link {% if page.nav-slug == 'home' %}active{% endif %}"
             aria-current="page"
-            href="/"
+            href="{{ site.baseurl }}"
             >Home</a
           >
         </li>
         <li class="nav-item">
           <a
             class="nav-link {% if page.nav-slug == 'events' %}active{% endif %}"
-            href="/events/"
+            href="{{ site.baseurl }}/events/"
             >Events</a
           >
         </li>
         <li class="nav-item">
           <a
             class="nav-link {% if page.nav-slug == 'community' %}active{% endif %}"
-            href="/community.html"
+            href="{{ site.baseurl }}/community.html"
             >Community</a
           >
         </li>
         <li class="nav-item">
           <a
             class="nav-link {% if page.nav-slug == 'thailand' %}active{% endif %}"
-            href="/thailand.html"
+            href="{{ site.baseurl }}/thailand.html"
             >Thailand</a
           >
         </li>
         <li class="nav-item me-auto">
           <a
             class="nav-link {% if page.nav-slug == 'about' %}active{% endif %}"
-            href="/about.html"
+            href="{{ site.baseurl }}/about.html"
             >About</a
           >
         </li>
@@ -61,18 +61,18 @@
             Tools
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/tools/names">Names App</a></li>
-            <li><a class="dropdown-item" href="/tools/canvas">Canvas</a></li>
+            <li><a class="dropdown-item" href="{{ site.baseurl }}/tools/names">Names App</a></li>
+            <li><a class="dropdown-item" href="{{ site.baseurl }}/tools/canvas">Canvas</a></li>
             <li>
               <hr class="dropdown-divider" />
             </li>
             <li>
-              <a class="dropdown-item" href="/tools/qrcode-gen"
+              <a class="dropdown-item" href="{{ site.baseurl }}/tools/qrcode-gen"
                 >QR Code Generator</a
               >
             </li>
             <li>
-              <a class="dropdown-item" href="/tools/thai-keyboard"
+              <a class="dropdown-item" href="{{ site.baseurl }}/tools/thai-keyboard"
                 >Thai Keyboard</a
               >
             </li>
@@ -91,13 +91,13 @@
               <hr class="dropdown-divider" />
             </li>
             <li>
-              <a class="dropdown-item" href="/tools/">All tools</a>
+              <a class="dropdown-item" href="{{ site.baseurl }}/tools/">All tools</a>
             </li>
           </ul>
         </li>
       </ul>
       <div class="d-flex">
-        <a href="/join-us.html" class="btn btn-primary btn-lg">Join us!</a>
+        <a href="{{ site.baseurl }}/join-us.html" class="btn btn-primary btn-lg">Join us!</a>
       </div>
     </div>
   </div>

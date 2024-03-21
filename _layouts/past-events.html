@@ -11,8 +11,8 @@
           <div class="container-fluid">
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item"><a href="/events">Events</a></li>
+                <li class="breadcrumb-item"><a href="{{ site.baseurl }}/">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ site.baseurl }}/events">Events</a></li>
                 <li class="breadcrumb-item active" aria-current="page">
                   Past Events
                 </li>
@@ -35,7 +35,7 @@
             }}
           </p>
           <p>{{ event.short_description | markdownify }}</p>
-          <a href="{{ event.url }}" class="btn btn-outline-secondary">Detail</a>
+          <a href="{{ event.url | relative_url }}" class="btn btn-outline-secondary">Detail</a>
         </div>
         {% endfor %} {% include footer.html %}
       </div>
