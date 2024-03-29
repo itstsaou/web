@@ -5,7 +5,7 @@ title: List of our tools
 description: Where our developers have been sinking the time into 😂
 ---
 
-- [QR Code Generator](/tools/qrcode-gen)
-- [Virtual Thai Keyboard](/tools/thai-keyboard)
-- [Names App](/tools/names)
-- [Meeting Checklist](/tools/meeting-checklist)
+- [QR Code Generator]({{ site.baseurl }}/tools/qrcode-gen)
+- [Virtual Thai Keyboard]({{ site.baseurl }}/tools/thai-keyboard)
+- [Names App]({{ site.baseurl }}/tools/names)
+- [Meeting Checklist]({{ site.baseurl }}/tools/meeting-checklist)
